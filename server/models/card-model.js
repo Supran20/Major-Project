@@ -7,9 +7,9 @@ const cardSchema = new Schema({
   No_of_Reviewers: { type: Number, required: true },
   Pieces_sold: { type: Number, required: true },
   Gender: { type: Number, required: true },
-  Feature: { type: Number, required: true },
-  Material: { type: Number, required: true },
-  Color: { type: Number, required: true },
+  Feature: { type: String, required: true },
+  Material: { type: String, required: true },
+  Color: { type: String, required: true },
 });
 
 const Card = new model("Card", cardSchema);

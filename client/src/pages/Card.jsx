@@ -25,6 +25,9 @@ export const ProductCard = () => {
                   </div>
                   <h2>{curElem.Name}</h2>
                   <p>Pieces Sold:{curElem.Pieces_sold}</p>
+                  <p>Color:{curElem.Color}</p>
+                  <p>Feature:{curElem.Feature}</p>
+                  <p>Material:{curElem.Material}</p>
                 </div>
               </div>
             );
