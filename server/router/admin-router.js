@@ -21,6 +21,10 @@ router
   .patch(authMiddleware, adminMiddleware, adminController.updateUserById);
 
 router
+  .route("/status/update")
+  .patch(authMiddleware, adminMiddleware, adminController.updateFeature);
+
+router
   .route("/users/delete/:id")
   .delete(authMiddleware, adminMiddleware, adminController.deleteUserById);
 

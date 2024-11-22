@@ -1,6 +1,8 @@
 import pandas as pd
 import joblib
 from pymongo import MongoClient
+import schedule
+import time
 
 # Load the trained model
 model_filename = 'xgb_model_market_price.pkl'
@@ -23,51 +25,61 @@ def get_frequency(collection, attribute_name):
         return doc.get("value", 0)  # Default to 0 if 'value' is missing
     return 0
 
-# Retrieve all documents in the cards collection
-documents = cards_collection.find()
+# Main task function to process documents
+def process_documents():
+    print("Running scheduled task...")
 
-# Iterate through each document
-for document in documents:
-    print("\nProcessing document:")
-    for key, value in document.items():
-        print(f"{key}: {value}")
+    # Retrieve all documents in the cards collection
+    documents = cards_collection.find()
 
-    # Ensure all required fields are present in the document
-    try:
-        # Fetch frequencies dynamically
-        color_frequency = get_frequency(colors_collection, document.get('Color', 'Unknown'))
-        material_frequency = get_frequency(materials_collection, document.get('Material', 'Unknown'))
-        feature_frequency = get_frequency(features_collection, document.get('Feature', 'Unknown'))
+    # Iterate through each document
+    for document in documents:
+        print("\nProcessing document:")
+        for key, value in document.items():
+            print(f"{key}: {value}")
 
-        # Prepare the input data for prediction
-        input_data = {
-            'Base Price': float(document.get('Base_Price', 0)),  # Default to 0 if missing
-            'Stock': int(document.get('Stock', 0)),
-            'No_of_Reviewers': int(document.get('No_of_Reviewers', 0)),
-            'Pieces sold': int(document.get('Pieces_sold', 0)),
-            'Feature_Frequency': feature_frequency,
-            'Material_Frequency': material_frequency,
-            'Color_Frequency': color_frequency,
-            'Gender': int(document.get('Gender', 0))
-        }
+        # Ensure all required fields are present in the document
+        try:
+            # Fetch frequencies dynamically
+            color_frequency = get_frequency(colors_collection, document.get('Color', 'Unknown'))
+            material_frequency = get_frequency(materials_collection, document.get('Material', 'Unknown'))
+            feature_frequency = get_frequency(features_collection, document.get('Feature', 'Unknown'))
 
-        # Convert input data to a DataFrame
-        input_df = pd.DataFrame([input_data])
+            # Prepare the input data for prediction
+            input_data = {
+                'Base Price': float(document.get('Base_Price', 0)),  # Default to 0 if missing
+                'Stock': int(document.get('Stock', 0)),
+                'No_of_Reviewers': int(document.get('No_of_Reviewers', 0)),
+                'Pieces sold': int(document.get('Pieces_sold', 0)),
+                'Feature_Frequency': feature_frequency,
+                'Material_Frequency': material_frequency,
+                'Color_Frequency': color_frequency,
+                'Gender': int(document.get('Gender', 0))
+            }
 
-        # Predict the Market Price using the trained model
-        predicted_market_price = model.predict(input_df)
-        predicted_market_price_int = int(round(predicted_market_price[0]))  # Convert to integer
-        print("Predicted Market Price (as integer):", predicted_market_price_int)
+            # Convert input data to a DataFrame
+            input_df = pd.DataFrame([input_data])
 
-        # Update the document in the database with the predicted price as Market Price
-        update_data = {
-            'Market_Price': predicted_market_price_int
-        }
-        cards_collection.update_one({'_id': document['_id']}, {"$set": update_data})
-        print("Database updated with new Market Price for document.")
+            # Predict the Market Price using the trained model
+            predicted_market_price = model.predict(input_df)
+            predicted_market_price_int = int(round(predicted_market_price[0]))  # Convert to integer
+            print("Predicted Market Price (as integer):", predicted_market_price_int)
 
-    except TypeError as e:
-        print(f"Error converting document fields to correct types: {e}")
+            # Update the document in the database with the predicted price as Market Price
+            update_data = {
+                'Market_Price': predicted_market_price_int
+            }
+            cards_collection.update_one({'_id': document['_id']}, {"$set": update_data})
+            print("Database updated with new Market Price for document.")
 
-# Close the connection
-client.close()
+        except TypeError as e:
+            print(f"Error converting document fields to correct types: {e}")
+
+# Scheduler setup
+schedule.every(20).seconds.do(process_documents)  # Runs the task every 20 seconds
+
+# Keep the scheduler running
+print("Scheduler is running...")
+while True:
+    schedule.run_pending()
+    time.sleep(1)

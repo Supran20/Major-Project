@@ -12,6 +12,7 @@ import { AdminLayout } from "./components/layouts/AdminLayout";
 import { AdminUsers } from "./pages/Admin-User";
 import { AdminContacts } from "./pages/Admin-Contacts";
 import { AdminUpdate } from "./pages/Admin-Update";
+// import { AdminStatus } from "./pages/Admin-Status";
 
 //subscribe Suprantechnical channel for more awesome content.
 
@@ -31,6 +32,7 @@ const App = () => {
         <Route path="/admin" element={<AdminLayout />}>
           <Route path="users" element={<AdminUsers />} />
           <Route path="contacts" element={<AdminContacts />} />
+          {/* <Route path="status" element={<AdminStatus />} /> */}
           <Route path="user/:id/edit" element={<AdminUpdate />} />
         </Route>
       </Routes>

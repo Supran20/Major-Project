@@ -1,5 +1,7 @@
 const User = require("../models/user-model");
 const Contact = require("../models/contact-model");
+const Card = require("../models/card-model"); // Import your Card model
+const mongoose = require("mongoose");
 
 //*------------------------------------------
 //*User logic
@@ -92,6 +94,45 @@ const deleteContactById = async (req, res) => {
   }
 };
 
+//*------------------------------------------
+//*Update Card logic
+//*------------------------------------------
+
+const updateFeature = async (req, res, next) => {
+  try {
+    const cards = await Card.find(); // Fetch all cards
+    if (!cards || cards.length === 0) {
+      return res.status(404).json({ message: "No cards found" });
+    }
+
+    const updatedCards = await Promise.all(
+      cards.map(async (card) => {
+        try {
+          const newStock = Math.floor(Math.random() * 500) + 1;
+          console.log(`Updating stock for card ID ${card._id}: ${newStock}`);
+          const result = await Card.findByIdAndUpdate(
+            card._id, // Directly use _id if it works as a string
+            { $set: { Stock: newStock } },
+            { new: true } // Return the updated document
+          );
+          return result;
+        } catch (updateError) {
+          console.error("Error updating card:", updateError);
+          return null;
+        }
+      })
+    );
+
+    console.log("Updated Cards:", updatedCards);
+    return res
+      .status(200)
+      .json({ message: "Stock levels updated successfully", updatedCards });
+  } catch (error) {
+    console.error("Error in updateStockLevels:", error);
+    next(error);
+  }
+};
+
 module.exports = {
   getAllUsers,
   getAllContacts,
@@ -99,4 +140,5 @@ module.exports = {
   getUserById,
   updateUserById,
   deleteContactById,
+  updateFeature,
 };
