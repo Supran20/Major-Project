@@ -45,7 +45,7 @@ export const AdminLayout = () => {
                 Analytics
               </li>
               <li>
-                <NavLink to="/admin/contacts">
+                <NavLink to="/admin/status">
                   <SiStatuspal />
                   Status
                 </NavLink>
