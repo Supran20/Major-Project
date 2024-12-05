@@ -21,8 +21,8 @@ router
   .patch(authMiddleware, adminMiddleware, adminController.updateUserById);
 
 router
-  .route("/status/update")
-  .patch(authMiddleware, adminMiddleware, adminController.updateFeature);
+  .route("/status/:glassName")
+  .get(authMiddleware, adminMiddleware, adminController.getSalesData);
 
 router
   .route("/users/delete/:id")

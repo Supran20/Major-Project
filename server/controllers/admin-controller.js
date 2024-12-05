@@ -95,44 +95,30 @@ const deleteContactById = async (req, res) => {
 };
 
 //*------------------------------------------
-//*Update Card logic
+//*View Glass logic
 //*------------------------------------------
-
-const updateFeature = async (req, res, next) => {
+const getSalesData = async (req, res, next) => {
   try {
-    const cards = await Card.find(); // Fetch all cards
-    if (!cards || cards.length === 0) {
-      return res.status(404).json({ message: "No cards found" });
+    const { glassName } = req.params;
+
+    // Access the collection dynamically based on glassName
+    const collection = mongoose.connection.db.collection(glassName);
+
+    // Fetch the data from the collection and convert it to an array
+    const salesCursor = collection.find();
+    const sales = await salesCursor.toArray(); // Converts the cursor to an array
+
+    if (!sales || sales.length === 0) {
+      return res.status(404).json({ message: "No Sales Found" });
     }
 
-    const updatedCards = await Promise.all(
-      cards.map(async (card) => {
-        try {
-          const newStock = Math.floor(Math.random() * 500) + 1;
-          console.log(`Updating stock for card ID ${card._id}: ${newStock}`);
-          const result = await Card.findByIdAndUpdate(
-            card._id, // Directly use _id if it works as a string
-            { $set: { Stock: newStock } },
-            { new: true } // Return the updated document
-          );
-          return result;
-        } catch (updateError) {
-          console.error("Error updating card:", updateError);
-          return null;
-        }
-      })
-    );
-
-    console.log("Updated Cards:", updatedCards);
-    return res
-      .status(200)
-      .json({ message: "Stock levels updated successfully", updatedCards });
+    // Send the sales data as response
+    return res.status(200).json(sales);
   } catch (error) {
-    console.error("Error in updateStockLevels:", error);
+    console.error(`Error querying sales data: ${error.message}`);
     next(error);
   }
 };
-
 module.exports = {
   getAllUsers,
   getAllContacts,
@@ -140,5 +126,5 @@ module.exports = {
   getUserById,
   updateUserById,
   deleteContactById,
-  updateFeature,
+  getSalesData,
 };
