@@ -3,6 +3,7 @@ import joblib
 from pymongo import MongoClient
 import schedule
 import time
+import random
 
 # Load the trained model
 model_filename = 'xgb_model_market_price.pkl'
@@ -142,18 +143,74 @@ def extract_and_store_glasses_data():
 
             # Insert the data into the new collection
             target_collection.insert_one(document_copy)
-            print(f"Data stored for ''roundmetalsunglasses'': {document_copy}")
+            print(f"Data stored for 'roundmetalsunglasses': {document_copy}")
 
         except Exception as e:
-            print(f"Error while inserting data into ''roundmetalsunglasses'' collection: {e}")
+            print(f"Error while inserting data into 'roundmetalsunglasses' collection: {e}")
+
+# Function to update the 'No_of_Reviewers' field
+def update_no_of_reviewers():
+    print("Running No_of_Reviewers update task...")
+
+    # Retrieve all documents in the cards collection
+    documents = cards_collection.find()
+
+    # Iterate through each document
+    for document in documents:
+        print("\nProcessing document:")
+        for key, value in document.items():
+            print(f"{key}: {value}")
+
+        # Ensure that 'No_of_Reviewers' is present in the document
+        try:
+            # Generate a random number between 10 and 300 for 'No_of_Reviewers'
+            new_no_of_reviewers = random.randint(10, 300)
+            print(f"Updating No_of_Reviewers for card ID {document['_id']}: {new_no_of_reviewers}")
+
+            # Update the document in the database with the new 'No_of_Reviewers' value
+            update_data = {'No_of_Reviewers': new_no_of_reviewers}
+            cards_collection.update_one({'_id': document['_id']}, {"$set": update_data})
+            print(f"No_of_Reviewers updated for card ID {document['_id']}. New value: {new_no_of_reviewers}")
+
+        except Exception as e:
+            print(f"Error updating No_of_Reviewers for document ID {document['_id']}: {e}")
+
+# Function to update the 'Pieces_sold' field
+def update_pieces_sold():
+    print("Running Pieces_sold update task...")
+
+    # Retrieve all documents in the cards collection
+    documents = cards_collection.find()
+
+    # Iterate through each document
+    for document in documents:
+        print("\nProcessing document:")
+        for key, value in document.items():
+            print(f"{key}: {value}")
+
+        # Ensure that 'Pieces_sold' is present in the document
+        try:
+            # Generate a random number between 20 and 500 for 'Pieces_sold'
+            new_pieces_sold = random.randint(20, 500)
+            print(f"Updating Pieces_sold for card ID {document['_id']}: {new_pieces_sold}")
+
+            # Update the document in the database with the new 'Pieces_sold' value
+            update_data = {'Pieces_sold': new_pieces_sold}
+            cards_collection.update_one({'_id': document['_id']}, {"$set": update_data})
+            print(f"Pieces_sold updated for card ID {document['_id']}. New value: {new_pieces_sold}")
+
+        except Exception as e:
+            print(f"Error updating Pieces_sold for document ID {document['_id']}: {e}")
 
 # Scheduler setup
 schedule.every(5).seconds.do(update_stock_levels)  # Runs the stock update task every 5 seconds
 schedule.every(20).seconds.do(process_documents)   # Runs the market price prediction task every 20 seconds
 schedule.every(8).seconds.do(extract_and_store_glasses_data)  # Runs the data extraction task every 8 seconds
+schedule.every(15).seconds.do(update_no_of_reviewers)  # Runs the No_of_Reviewers update task every 15 seconds
+schedule.every(10).seconds.do(update_pieces_sold)  # Runs the Pieces_sold update task every 10 seconds
 
-# Keep the scheduler running
+# Start the scheduler
 print("Scheduler is running...")
 while True:
-    schedule.run_pending()
-    time.sleep(1)
+    schedule.run_pending()  # Check and run pending tasks
+    time.sleep(1)  # Wait for a short time before checking again
