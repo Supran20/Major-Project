@@ -3,6 +3,7 @@ import joblib
 from pymongo import MongoClient
 import schedule
 import time
+from datetime import datetime
 import random
 
 # Load the trained model
@@ -140,6 +141,9 @@ def extract_and_store_glasses_data():
         try:
             # Remove the MongoDB internal '_id' field to avoid conflicts during insertion
             document_copy = {key: value for key, value in document.items() if key != '_id'}
+
+            # Add a timestamp to the document
+            document_copy["Timestamp"] = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
             # Insert the data into the new collection
             target_collection.insert_one(document_copy)

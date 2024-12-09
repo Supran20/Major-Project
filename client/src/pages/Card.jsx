@@ -16,18 +16,23 @@ export const ProductCard = () => {
             return (
               <div className="card" key={index}>
                 <div className="card-img">
-                  <img src="/images/shades.jpg" alt="designer" width="200" />
+                  {/* Dynamically render the image */}
+                  <img
+                    src={curElem.imageURL || "/images/default.jpg"}
+                    alt={curElem.Name}
+                    width="400"
+                  />
                 </div>
                 <div className="card-details">
                   <div className="grid grid-two-cols">
-                    <p>Stock:{curElem.Stock}</p>
-                    <p>Rs{curElem.Market_Price}</p>
+                    <p>Stock: {curElem.Stock}</p>
+                    <p>Rs {curElem.Market_Price}</p>
                   </div>
                   <h2>{curElem.Name}</h2>
-                  <p>Pieces Sold:{curElem.Pieces_sold}</p>
-                  <p>Color:{curElem.Color}</p>
-                  <p>Feature:{curElem.Feature}</p>
-                  <p>Material:{curElem.Material}</p>
+                  <p>Pieces Sold: {curElem.Pieces_sold}</p>
+                  <p>Color: {curElem.Color}</p>
+                  <p>Feature: {curElem.Feature}</p>
+                  <p>Material: {curElem.Material}</p>
                 </div>
               </div>
             );

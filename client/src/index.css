@@ -227,3 +227,97 @@ button {
 }
 
 /***** End Service Section Styles *****/
+
+.admin-sales table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0;
+  font-size: 1rem;
+  font-family: Arial, sans-serif;
+}
+
+.admin-sales th,
+.admin-sales td {
+  border: 1px solid #ddd;
+  text-align: center;
+  padding: 12px;
+}
+
+.admin-sales th {
+  background-color: #f4f4f4;
+  font-weight: bold;
+}
+
+.admin-sales tbody tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.admin-sales tbody tr:hover {
+  background-color: #f1f1f1;
+}
+
+.admin-sales {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  border-radius: 8px;
+  background-color: #ffffff;
+}
+
+.admin-glasses-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+/* Make sure the title and table are properly aligned and not side by side */
+.admin-glasses-section {
+  margin-top: 20px;
+  padding: 20px;
+}
+
+.glass-details-title {
+  font-size: 2rem;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.table-container {
+  margin-top: 20px;
+  overflow-x: auto; /* Allow scrolling if the table is too wide */
+}
+
+.glass-details-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.glass-details-table th,
+.glass-details-table td {
+  padding: 12px;
+  border: 1px solid #ddd;
+}
+
+.glass-details-table th {
+  background-color: #f4f4f4;
+  font-weight: bold;
+}
+
+.error-message {
+  color: red;
+  font-weight: bold;
+  text-align: center;
+}
+
+@media screen and (max-width: 768px) {
+  /* Make the table more responsive on smaller screens */
+  .glass-details-table {
+    font-size: 14px;
+  }
+
+  .glass-details-table th,
+  .glass-details-table td {
+    padding: 8px;
+  }
+}
