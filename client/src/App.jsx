@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { Home } from "./pages/Home";
+import { Home } from "./pages/homepage/Index";
 import { About } from "./pages/About";
 import { ProductCard } from "./pages/Card";
 import { Contact } from "./pages/Contact";
@@ -14,22 +14,25 @@ import { AdminContacts } from "./pages/Admin-Contacts";
 import { AdminUpdate } from "./pages/Admin-Update";
 import { AdminStatus } from "./pages/Admin-Status";
 import { GlassDetails } from "./pages/GlassDetails";
-
-//subscribe Suprantechnical channel for more awesome content.
+import { GlassInfo } from "./pages/glassdetail/GlassInfo";
 
 const App = () => {
   return (
     <Router>
       <Navbar />
       <Routes>
+        {/* Main Routes */}
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
         <Route path="/card" element={<ProductCard />} />
+        <Route path="/card/:cardByName" element={<GlassInfo />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/service" element={<Service />} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
         <Route path="/logout" element={<Logout />} />
+
+        {/* Admin Routes */}
         <Route path="/admin" element={<AdminLayout />}>
           <Route path="users" element={<AdminUsers />} />
           <Route path="contacts" element={<AdminContacts />} />

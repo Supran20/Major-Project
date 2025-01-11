@@ -126,31 +126,39 @@ def process_documents():
         except TypeError as e:
             print(f"Error converting document fields to correct types: {e}")
 
-# Function to extract data for "Round Metal Sunglasses" and store it in a new collection
+# Function to extract and store data for all eyewear types
 def extract_and_store_glasses_data():
-    print("Extracting data for 'Round Metal Sunglasses'...")
+    print("Extracting data for all eyewear...")
 
-    # Retrieve the document(s) with the name "Round Metal Sunglasses"
-    documents = cards_collection.find({"Name": "Round Metal Sunglasses"})
+    # Retrieve all unique eyewear names in the cards collection
+    eyewear_names = cards_collection.distinct("Name")
 
-    # Target collection for storing the data
-    target_collection = db["roundmetalsunglasses"]
+    # Iterate through each eyewear name
+    for eyewear_name in eyewear_names:
+        print(f"Processing eyewear: {eyewear_name}")
 
-    # Iterate through the retrieved documents
-    for document in documents:
-        try:
-            # Remove the MongoDB internal '_id' field to avoid conflicts during insertion
-            document_copy = {key: value for key, value in document.items() if key != '_id'}
+        # Retrieve the document(s) with the current eyewear name
+        documents = cards_collection.find({"Name": eyewear_name})
 
-            # Add a timestamp to the document
-            document_copy["Timestamp"] = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        # Create a target collection for storing the data (no spaces, no underscores)
+        target_collection_name = eyewear_name.replace(" ", "").replace("_", "").lower()  # Remove spaces and underscores, convert to lowercase
+        target_collection = db[target_collection_name]
 
-            # Insert the data into the new collection
-            target_collection.insert_one(document_copy)
-            print(f"Data stored for 'roundmetalsunglasses': {document_copy}")
+        # Iterate through the retrieved documents
+        for document in documents:
+            try:
+                # Remove the MongoDB internal '_id' field to avoid conflicts during insertion
+                document_copy = {key: value for key, value in document.items() if key != '_id'}
 
-        except Exception as e:
-            print(f"Error while inserting data into 'roundmetalsunglasses' collection: {e}")
+                # Add a timestamp to the document
+                document_copy["Timestamp"] = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+
+                # Insert the data into the new collection
+                target_collection.insert_one(document_copy)
+                print(f"Data stored for '{eyewear_name}': {document_copy}")
+
+            except Exception as e:
+                print(f"Error while inserting data into '{eyewear_name}' collection: {e}")
 
 # Function to update the 'No_of_Reviewers' field
 def update_no_of_reviewers():
