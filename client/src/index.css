@@ -80,7 +80,49 @@ li {
 }
 
 /*? Module Rules / Reusable */
+
 button {
+  /* Core Styling */
+  display: inline-block;
+  padding: 1rem 2.5rem; /* Consistent padding for uniform size */
+  font-size: 1.6rem; /* Text size */
+  font-weight: 600; /* Slightly bold text */
+  text-transform: capitalize; /* Capitalize the text */
+  color: #ffffff; /* Text color */
+  background-color: #4caf50; /* Attractive green background */
+  border: none; /* Remove default border */
+  border-radius: 1.2rem; /* Rounded corners for a modern look */
+  cursor: pointer; /* Pointer cursor on hover */
+  text-align: center;
+  letter-spacing: 0.05rem; /* Slight letter spacing */
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15); /* Subtle shadow for depth */
+
+  /* Animation */
+  transition: all 0.3s ease-in-out;
+}
+
+button:hover {
+  /* Hover Effect */
+  background-color: #45a049; /* Slightly darker green */
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2); /* More pronounced shadow */
+  transform: translateY(-3px); /* Slight lift effect */
+}
+
+button:active {
+  /* Active State */
+  background-color: #388e3c; /* Even darker green */
+  transform: translateY(1px); /* Pressed effect */
+}
+
+/* Add Flexbox for Button Containers */
+.button-container {
+  display: flex;
+  gap: 1.5rem; /* Space between buttons */
+  flex-wrap: wrap; /* Allow buttons to wrap on smaller screens */
+  justify-content: center; /* Center-align buttons */
+}
+/* 
+.button {
   text-transform: capitalize;
   padding: 1rem 2.2rem;
   font-size: 1.7rem;
@@ -91,7 +133,9 @@ button {
   cursor: pointer;
   letter-spacing: 0.1rem;
   transition: border-color 0.3s;
-}
+  
+} */
+
 
 .secondary-btn {
   background-color: transparent;
@@ -156,6 +200,52 @@ button {
     }
   }
 }
+
+
+/* Base styling for the heading */
+.heading-highlight {
+  font-size: 3rem; /* Large and prominent */
+  font-family: 'Poppins', sans-serif; /* Modern font */
+  font-weight: 700; /* Bold for emphasis */
+  text-align: center; /* Center-align for focus */
+  color: #333; /* Dark base color */
+  position: relative;
+  padding-bottom: 0.5rem;
+  margin: 2rem 0;
+}
+
+/* Adding a gradient background with clipping */
+.heading-highlight::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 50%;
+  height: 0.4rem;
+  background: linear-gradient(90deg, #4caf50, #2196f3);
+  border-radius: 2rem;
+  animation: slide-in 1.5s ease-in-out infinite alternate;
+}
+
+/* Underline animation */
+@keyframes slide-in {
+  0% {
+    width: 50%;
+  }
+  100% {
+    width: 80%;
+  }
+}
+
+/* Optional shadow for text */
+.heading-highlight {
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+/* Add gradient text on hover */
+
+
 
 /***** End Analytics Section *****/
 

@@ -10,6 +10,7 @@ header {
   background-color: #333;
   color: #fff;
   padding: 1rem 0;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add shadow for better visibility */
 }
 
 .container {
@@ -18,15 +19,16 @@ header {
   justify-content: space-between;
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 1rem;
+  padding: 0 1.5rem;
 }
 
 /* Logo styling */
 .logo-brand a {
-  font-size: 1.6rem;
+  font-size: 2rem; /* Increase font size for better visibility */
   font-weight: bold;
   color: #fff;
   text-decoration: none;
+  font-family: 'Poppins', sans-serif; /* Stylish font */
 }
 
 .logo-brand a:hover {
@@ -36,25 +38,50 @@ header {
 /* Navbar list styling */
 nav ul {
   display: flex;
-  gap: 1.5rem;
+  gap: 2rem; /* Increase spacing between items */
+  align-items: center;
 }
 
 nav ul li a {
   color: #fff;
   text-decoration: none;
-  font-size: 1rem;
+  font-size: 1.2rem; /* Increased font size */
+  font-family: 'Roboto', sans-serif; /* Modern font */
   transition: color 0.3s ease;
+  font-weight: 500;
 }
 
 nav ul li a:hover {
   color: #4caf50;
 }
 
+/* Login button styling */
+nav ul li.login {
+  margin-left: 1.5rem; /* Add margin to separate the login button */
+}
+
+nav ul li.login a {
+  color: #fff;
+  background-color: #4caf50;
+  padding: 0.8rem 1.5rem; /* Proper padding for the button */
+  font-size: 1.2rem; /* Font size for better visibility */
+  border-radius: 1.5rem; /* Rounded corners for button */
+  font-family: 'Poppins', sans-serif;
+  text-transform: uppercase;
+  transition: all 0.3s ease;
+}
+
+nav ul li.login a:hover {
+  background-color: #45a049;
+  color: #fff;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3); /* Add shadow for hover effect */
+}
+
 /* Responsive styling */
 @media (max-width: 768px) {
-  /* Center the logo on smaller screens */
   .container {
     flex-direction: column;
+    align-items: flex-start;
   }
 
   nav ul {
@@ -69,7 +96,6 @@ nav ul li a:hover {
     display: flex;
   }
 
-  /* Hamburger menu */
   .hamburger {
     display: flex;
     flex-direction: column;
@@ -77,9 +103,14 @@ nav ul li a:hover {
   }
 
   .hamburger div {
-    width: 25px;
-    height: 3px;
+    width: 30px;
+    height: 4px;
     background-color: #fff;
-    margin: 4px 0;
+    margin: 5px 0;
+  }
+
+  nav ul li.login a {
+    width: 100%; /* Full-width login button for mobile view */
+    text-align: center;
   }
 }

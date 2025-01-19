@@ -12,8 +12,8 @@ export const About = () => {
           <div className="container grid grid-two-cols">
             <div className="hero-content">
               {/* <p>We care to cure your Health</p> */}
-              <p>Hi </p>
-              <h1>Why Choose Us? </h1>
+              
+              <h1 class="heading-highlight">Why Choose Us?</h1>
               <p>
                 Expertise: Our team consists of experienced IT professionals who
                 are passionate about staying up-to-date with the latest industry
@@ -38,9 +38,9 @@ export const About = () => {
               </p>
               <div className="btn btn-group">
                 <NavLink to="/contact">
-                  <button className="btn"> Connect Now</button>
+                  <button className="button-container"> Connect Now</button>
                 </NavLink>
-                <button className="btn secondary-btn">learn more</button>
+                {/* <button className="btn secondary-btn">learn more</button> */}
               </div>
             </div>
             <div className="hero-image">
