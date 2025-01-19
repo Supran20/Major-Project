@@ -228,6 +228,68 @@ button:active {
   animation: slide-in 1.5s ease-in-out infinite alternate;
 }
 
+/*aboutus section
+/* General section styling */
+.expertise-section {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  padding: 2rem;
+  background-color: #f9f9f9;
+  border-radius: 1rem;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Individual feature box */
+.feature {
+  background: #fff;
+  border-radius: 1rem;
+  padding: 2rem;
+  text-align: center;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* On hover */
+.feature:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Icon styling */
+.icon {
+  font-size: 2.5rem;
+  color: #4caf50;
+  margin-bottom: 1rem;
+}
+
+/* Heading styling */
+.feature h3 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 1rem;
+}
+
+/* Paragraph styling */
+.feature p {
+  font-size: 1rem;
+  color: #666;
+  line-height: 1.6;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .feature {
+    padding: 1.5rem;
+  }
+
+  .icon {
+    font-size: 2rem;
+  }
+}
+
+
 /* Underline animation */
 @keyframes slide-in {
   0% {
