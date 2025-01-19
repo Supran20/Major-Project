@@ -80,7 +80,49 @@ li {
 }
 
 /*? Module Rules / Reusable */
+
 button {
+  /* Core Styling */
+  display: inline-block;
+  padding: 1rem 2.5rem; /* Consistent padding for uniform size */
+  font-size: 1.6rem; /* Text size */
+  font-weight: 600; /* Slightly bold text */
+  text-transform: capitalize; /* Capitalize the text */
+  color: #ffffff; /* Text color */
+  background-color: #4caf50; /* Attractive green background */
+  border: none; /* Remove default border */
+  border-radius: 1.2rem; /* Rounded corners for a modern look */
+  cursor: pointer; /* Pointer cursor on hover */
+  text-align: center;
+  letter-spacing: 0.05rem; /* Slight letter spacing */
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15); /* Subtle shadow for depth */
+
+  /* Animation */
+  transition: all 0.3s ease-in-out;
+}
+
+button:hover {
+  /* Hover Effect */
+  background-color: #45a049; /* Slightly darker green */
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2); /* More pronounced shadow */
+  transform: translateY(-3px); /* Slight lift effect */
+}
+
+button:active {
+  /* Active State */
+  background-color: #388e3c; /* Even darker green */
+  transform: translateY(1px); /* Pressed effect */
+}
+
+/* Add Flexbox for Button Containers */
+.button-container {
+  display: flex;
+  gap: 1.5rem; /* Space between buttons */
+  flex-wrap: wrap; /* Allow buttons to wrap on smaller screens */
+  justify-content: center; /* Center-align buttons */
+}
+/* 
+.button {
   text-transform: capitalize;
   padding: 1rem 2.2rem;
   font-size: 1.7rem;
@@ -91,7 +133,9 @@ button {
   cursor: pointer;
   letter-spacing: 0.1rem;
   transition: border-color 0.3s;
-}
+  
+} */
+
 
 .secondary-btn {
   background-color: transparent;
@@ -127,6 +171,154 @@ button {
 
 /***** End Hero  *****/
 
+
+
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Body and Fonts */
+body {
+  font-family: 'Arial', sans-serif;
+}
+
+/* Header */
+header {
+  background-color: #333;
+  color: white;
+  padding: 1rem 0;
+}
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+nav ul {
+  display: flex;
+  gap: 1.5rem;
+}
+
+nav ul li a {
+  color: white;
+  text-decoration: none;
+  font-size: 1rem;
+  transition: color 0.3s ease;
+}
+
+nav ul li a:hover {
+  color: #4caf50;
+}
+
+/* Hero Section */
+.hero {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #f0f8ff;
+  padding: 4rem 2rem;
+}
+
+.hero-content {
+  max-width: 600px;
+}
+/* Gradient Styling for H1 */
+.hero-content h1 {
+  font-size: 3rem; /* Adjust as needed */
+  font-weight: bold;
+  background: linear-gradient(90deg, navy, gray, white, black);
+  -webkit-background-clip: text; /* Makes the gradient apply to the text */
+  -webkit-text-fill-color: transparent; /* Makes the rest of the text transparent */
+  text-align: center; /* Center-align the text */
+  margin: 0; /* Reset default margins */
+  padding: 10px 0; /* Add some space around */
+}
+
+/* Gradient Styling for P */
+.hero-content h1{
+  background: linear-gradient(135deg, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.6));
+  -webkit-background-clip: text;
+  color: transparent;
+  font-size: 3.5rem; /* Adjust based on your design */
+  text-align: left;
+  margin-left: -6rem;
+  /* margin-top: 50rem; */
+  /* margin-bottom: 9rem; */
+
+} 
+.hero-content {
+  background: linear-gradient(135deg, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.6));
+  -webkit-background-clip: text;
+  color: transparent;
+  font-size: 1.8rem; /* Adjust based on your design */
+  text-align: left;
+  margin-left: -3rem;
+  /* margin-top: 50rem; */
+  margin-bottom: 8rem;
+
+}
+
+.hero h1 {
+  font-size: 3rem;
+  color: #333;
+  margin-bottom: 1rem;
+  
+}
+
+.hero p {
+  font-size: 1.2rem;
+  color: #555;
+  margin-bottom: 2rem;
+
+}
+
+.hero-buttons {
+  display: flex;
+  gap: 1rem;
+}
+
+.btn {
+  background-color: #4caf50;
+  color: white;
+  padding: 0.8rem 2rem;
+  text-decoration: none;
+  border-radius: 1rem;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.btn:hover {
+  background-color: #45a049;
+}
+
+/* Hero Image */
+.hero-image img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 1rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Footer */
+footer {
+  background-color: #333;
+  color: white;
+  text-align: center;
+  padding: 1rem 0;
+  position: absolute;
+  width: 100%;
+  bottom: 0;
+}
+
+
+
+
+
+
 /***** Analytics Section *****/
 
 .section-analytics {
@@ -157,9 +349,112 @@ button {
   }
 }
 
-/***** End Analytics Section *****/
 
-/***** Service Section Styles *****/
+/* Base styling for the heading */
+.heading-highlight {
+  font-size: 3rem; /* Large and prominent */
+  font-family: 'Poppins', sans-serif; /* Modern font */
+  font-weight: 700; /* Bold for emphasis */
+  text-align: center; /* Center-align for focus */
+  color: #333; /* Dark base color */
+  position: relative;
+  padding-bottom: 0.5rem;
+  margin: 2rem 0;
+}
+
+/* Adding a gradient background with clipping */
+.heading-highlight::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 50%;
+  height: 0.4rem;
+  background: linear-gradient(90deg, #4caf50, #2196f3);
+  border-radius: 2rem;
+  animation: slide-in 1.5s ease-in-out infinite alternate;
+}
+
+/*aboutus section
+/* General section styling */
+.expertise-section {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  padding: 2rem;
+  background-color: #f9f9f9;
+  border-radius: 1rem;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Individual feature box */
+.feature {
+  background: #fff;
+  border-radius: 1rem;
+  padding: 2rem;
+  text-align: center;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* On hover */
+.feature:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Icon styling */
+.icon {
+  font-size: 2.5rem;
+  color: #4caf50;
+  margin-bottom: 1rem;
+}
+
+/* Heading styling */
+.feature h3 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 1rem;
+}
+
+/* Paragraph styling */
+.feature p {
+  font-size: 1rem;
+  color: #666;
+  line-height: 1.6;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .feature {
+    padding: 1.5rem;
+  }
+
+  .icon {
+    font-size: 2rem;
+  }
+}
+
+
+/* Underline animation */
+@keyframes slide-in {
+  0% {
+    width: 50%;
+  }
+  100% {
+    width: 80%;
+  }
+}
+
+/* Optional shadow for text */
+.heading-highlight {
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+/* Add gradient text on hover */
+
 
 .card {
   background-color: #fff; /* White background for cards */
@@ -321,3 +616,5 @@ button {
     padding: 8px;
   }
 }
+
+
