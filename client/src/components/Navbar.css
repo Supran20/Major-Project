@@ -1,116 +1,143 @@
-/* General reset for ul elements */
-ul {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-}
-
-/* Header container styling */
-header {
-  background-color: #333;
-  color: #fff;
-  padding: 1rem 0;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add shadow for better visibility */
-}
-
 .container {
   display: flex;
   align-items: center;
   justify-content: space-between;
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 1.5rem;
+  padding: 0 1rem;
+  width: 100%;
+}
+header {
+  background-color: #333;
+  color: #fff;
+  height: 65px; /* Fixed height for the navbar */
+  display: flex;
+  align-items: center; /* Vertically center items */
+  justify-content: space-between; /* Space between logo and nav links */
+  padding: 0 20px; /* Add some padding for spacing */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-/* Logo styling */
-.logo-brand a {
-  font-size: 2rem; /* Increase font size for better visibility */
+.logo-brand {
+  font-size: 1.5rem; /* Adjust logo size */
   font-weight: bold;
   color: #fff;
+  margin-right: auto;
+}
+
+.logo-brand a {
   text-decoration: none;
-  font-family: 'Poppins', sans-serif; /* Stylish font */
+  color: inherit;
 }
 
-.logo-brand a:hover {
-  color: #4caf50;
-}
-
-/* Navbar list styling */
+/* nav {
+  flex-grow: 1; /* Allow nav to take up available space */
+  /* text-align: center; Center align nav links */
+/* }  */
 nav ul {
   display: flex;
-  gap: 2rem; /* Increase spacing between items */
-  align-items: center;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  gap: 1.5rem; /* Space between nav items */
+}
+
+nav ul li {
+  display: inline-block;
 }
 
 nav ul li a {
-  color: #fff;
   text-decoration: none;
-  font-size: 1.2rem; /* Increased font size */
-  font-family: 'Roboto', sans-serif; /* Modern font */
-  transition: color 0.3s ease;
+  color: #fff;
+  font-size: 0.9rem; /* Adjust font size to fit */
   font-weight: 500;
+  padding: 5px 10px; /* Adjust padding for spacing */
+  transition: color 0.3s ease;
 }
 
 nav ul li a:hover {
-  color: #4caf50;
-}
-
-/* Login button styling */
-nav ul li.login {
-  margin-left: 1.5rem; /* Add margin to separate the login button */
+  color: #4caf50; /* Hover effect */
 }
 
 nav ul li.login a {
-  color: #fff;
   background-color: #4caf50;
-  padding: 0.8rem 1.5rem; /* Proper padding for the button */
-  font-size: 1.2rem; /* Font size for better visibility */
-  border-radius: 1.5rem; /* Rounded corners for button */
-  font-family: 'Poppins', sans-serif;
+  color: #fff;
+  padding: 5px 15px; /* Compact padding for button */
+  border-radius: 5px;
   text-transform: uppercase;
-  transition: all 0.3s ease;
 }
+
+
+/* Register Button */
+.register-button {
+  background-color: #4caf50; /* Green color for Register button */
+  color: #fff; /* White text */
+  padding: 5px 15px; /* Button padding */
+  border-radius: 5px; /* Rounded corners */
+  text-decoration: none; /* Remove underline */
+  font-size: 1.5rem; /* Font size */
+  font-weight: bold; /* Bold text */
+  text-transform: uppercase; /* Uppercase text */
+  transition: background-color 0.3s ease, transform 0.2s ease; /* Add hover effect */
+}
+
+.register-button:hover {
+  background-color: #45a049; /* Darker green on hover */
+  transform: scale(1.05); /* Slight scaling effect */
+}
+
+/* Login Button */
+.login-button {
+  background-color: transparent; /* Transparent background */
+  color: #4caf50; /* Green text */
+  padding: 5px 15px; /* Button padding */
+  border: 1.5px solid #4caf50; /* Green border */
+  border-radius: 5px; /* Rounded corners */
+  text-decoration: none; /* Remove underline */
+  font-size: 1.5rem; /* Font size */
+  font-weight: bold; /* Bold text */
+  text-transform: uppercase; /* Uppercase text */
+  transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease; /* Add hover effect */
+}
+
+.login-button:hover {
+  background-color: #4caf50; /* Green background on hover */
+  color: #fff; /* White text on hover */
+  transform: scale(1.05); /* Slight scaling effect */
+}
+
+/* Alignment Fix for Nav Links */
+.nav-link {
+  margin: 0 5px; /* Add spacing between buttons */
+}
+
+
 
 nav ul li.login a:hover {
   background-color: #45a049;
-  color: #fff;
-  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3); /* Add shadow for hover effect */
 }
 
-/* Responsive styling */
+/* Responsive Styling for Smaller Screens */
 @media (max-width: 768px) {
-  .container {
+  header {
     flex-direction: column;
-    align-items: flex-start;
+    height: auto;
+    padding: 10px;
   }
 
   nav ul {
-    display: none;
     flex-direction: column;
-    width: 100%;
-    text-align: center;
-    margin-top: 1rem;
+    align-items: flex-start;
+    gap: 10px; /* Add spacing between nav items */
   }
 
-  nav ul.active {
-    display: flex;
-  }
-
-  .hamburger {
-    display: flex;
-    flex-direction: column;
-    cursor: pointer;
-  }
-
-  .hamburger div {
-    width: 30px;
-    height: 4px;
-    background-color: #fff;
-    margin: 5px 0;
+  nav ul li a {
+    font-size: 1rem; /* Adjust font size for readability */
+    padding: 8px 12px;
   }
 
   nav ul li.login a {
-    width: 100%; /* Full-width login button for mobile view */
+    width: 100%; /* Full-width button on mobile */
     text-align: center;
   }
 }

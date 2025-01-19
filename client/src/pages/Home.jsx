@@ -1,44 +1,72 @@
-// import { Analytics } from "../components/Analytics";
 import Carousel from "react-bootstrap/Carousel";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Form } from "react-router-dom";
+
 export const Home = () => {
   return (
     <>
       <main>
-        {/* Carousel Section with Crossfade Effect */}
+        {/* Carousel Section with Centered Text */}
         <section className="section-hero">
           <Carousel fade>
             <Carousel.Item>
               <img
-                src="/images/carousel1.jpg" // Add a valid image path here
+                src="/images/FREEPICK-3.avif" // Add a valid image path here
                 alt="First slide"
                 width="100%"
                 height="500"
               />
-              <Carousel.Caption>
-                <h3>BEST SALES</h3>
+              <Carousel.Caption className="carousel-caption">
+                <div className="hero-content">
+                  <h1>Shades That Speak Your Style.</h1>
+                  <p>Your Style, Your Vision, Our Craft</p>
+                  <div className="hero-buttons">
+                    <a href="#shop" className="btn">Shop Now</a>
+                    <a href="#virtual-try-on" className="btn">Virtual Try On</a>
+                    {/* <a href="#contact-us" className="btn">Contact Us</a> */}
+                  </div>
+                </div>
               </Carousel.Caption>
             </Carousel.Item>
 
             <Carousel.Item>
               <img
-                src="/images/carousel2.jpg" // Add a valid image path here
+                src="/images/FREEPICK-1.jpg" // Add a valid image path here
                 alt="Second slide"
                 width="100%"
                 height="500"
               />
-              <Carousel.Caption></Carousel.Caption>
+              <Carousel.Caption className="carousel-caption">
+                <div className="hero-content">
+                  <h1>Shades That Speak Your Style.</h1>
+                  <p>Your Style, Your Vision, Our Craft</p>
+                  <div className="hero-buttons">
+                    <a href="#shop" className="btn">Shop Now</a>
+                    <a href="#virtual-try-on" className="btn">Virtual Try On</a>
+                    {/* <a href="#contact-us" className="btn">Contact Us</a> */}
+                  </div>
+                </div>
+              </Carousel.Caption>
             </Carousel.Item>
 
             <Carousel.Item>
               <img
-                src="/images/carousel3.jpg" // Add a valid image path here
+                src="/images/UNSPLASH-1.jpeg" // Add a valid image path here
                 alt="Third slide"
                 width="100%"
                 height="500"
               />
-              <Carousel.Caption></Carousel.Caption>
+              <Carousel.Caption className="carousel-caption">
+                <div className="hero-content">
+                  <h1>Shades That Speak Your Style.</h1>
+                  <p>Your Style, Your Vision, Our Craft</p>
+                  <div className="hero-buttons">
+                    <a href="#shop" className="btn">Shop Now</a>
+                    <a href="#virtual-try-on" className="btn">Virtual Try On</a>
+                    {/* <a href="#contact-us" className="btn">Contact Us</a> */}
+                  </div>
+                </div>
+              </Carousel.Caption>
             </Carousel.Item>
           </Carousel>
         </section>
@@ -61,9 +89,9 @@ export const Home = () => {
                     sophisticated optical frames to stylish sunglasses, we offer
                     premium quality eyewear for every style and preference.
                   </p>
-                  <div className="button-container">
+                  {/* <div className="button-container">
                     <a href="/card">
-                      <button className="bg-gray-600 text-white px-6 py-3 rounded-md hover:bg-gray-700 transition-colors  !important">
+                      <button className="bg-gray-600 text-white px-6 py-3 rounded-md hover:bg-gray-700 transition-colors !important">
                         Shop Now
                       </button>
                     </a>
@@ -72,7 +100,7 @@ export const Home = () => {
                         Virtual Try-On
                       </button>
                     </a>
-                  </div>
+                  </div> */}
                 </div>
               </div>
             </section>
@@ -81,7 +109,7 @@ export const Home = () => {
             <section className="bg-white py-16">
               <div className="container mx-auto px-4 grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
                 <div className="space-y-6 order-1 md:order-2">
-                  <p className="text-gray-600 font-semibold">Why Choose Us</p>
+                  <p className="text-gray-600 font-bold">Why Choose Us?</p>
                   <h2 className="text-4xl font-bold text-gray-900">
                     Expert Eye Care Services
                   </h2>
