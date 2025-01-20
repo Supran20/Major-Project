@@ -2,7 +2,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: Urbanist, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: Roboto, Helvetica, Urbanist, system-ui, Avenir, Arial, sans-serif;
   color-scheme: light dark;
 }
 
@@ -59,6 +59,8 @@ li {
   max-width: 140rem;
   padding: 4rem 2.4rem;
   margin: 0 auto;
+  /* background-color: #00171F; */
+  
 }
 
 .grid {
@@ -80,6 +82,82 @@ li {
 }
 
 /*? Module Rules / Reusable */
+.shop-button {
+  text-align: center; /* Centers the button within its container */
+}
+.virtual-try-on {
+  background-color: #0e1520; /* Transparent background */
+  color:  white;/* Green text */
+  padding: 5px 15px; /* Button padding */
+  border: 1.5px solid #082c3c;; /* Green border */
+  border-radius: 5px; /* Rounded corners */
+  text-decoration: none; /* Remove underline */
+  font-size: 1.5rem; /* Font size */
+  font-weight: bold; /* Bold text */
+  margin-top: 50px;
+  text-transform: uppercase; /* Uppercase text */
+  text-align: center;
+  transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease; /* Add hover effect */
+  
+  
+}
+
+.virtual-try-on:hover {
+  background-color: #2C466A; /* White background on hover */
+  color: #fff; /* White text on hover */
+  transform: scale(1.05);
+}
+
+/* Style for Virtual Try On button (similar to Login) */
+.try-on {
+  background-color: #0e1520; /* Transparent background */
+  color:  white;/* Green text */
+  padding: 5px 20px; /* Button padding */
+  border: 1.5px solid #082c3c;; /* Green border */
+  border-radius: 5px; /* Rounded corners */
+  text-decoration: none; /* Remove underline */
+  font-size: 1.5rem; /* Font size */
+  font-weight: bold; /* Bold text */
+  margin-top: 50px;
+ 
+  margin-left: 250px;
+  text-transform: uppercase; /* Uppercase text */
+  text-align: center;
+  transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease; /* Add hover effect */
+  
+  
+}
+
+.try-on:hover {
+  background-color: #2C466A; /* White background on hover */
+  color: #fff; /* White text on hover */
+  transform: scale(1.05);
+}
+
+/* Style for Shop Now button (similar to Register) */
+.shop-now {
+  display: inline-block;
+  border: 2px solid black;
+  /* background-color: rgb(139, 152, 156); Light blue background */
+  background-color:lightdark;
+  color: black; /* White text */
+  padding: 5px 15px; /* Padding for button size */
+  border-radius: 5px; /* Rounded corners */
+  text-decoration: none; /* No underline */
+  font-size: 1.5rem; /* Font size */
+  font-weight: bold; /* Bold text */
+  text-transform: uppercase; /* Uppercase text */
+  transition: background-color 0.3s ease, transform 0.2s ease; /* Smooth hover effect */
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  margin-left: 27px;
+}
+
+.shop-now:hover {
+  background-color: #2C466A; /* Darker blue on hover */
+  transform: scale(1.05); /* Slightly enlarges button on hover */
+}
+
+
 
 button {
   /* Core Styling */
@@ -89,7 +167,7 @@ button {
   font-weight: 600; /* Slightly bold text */
   text-transform: capitalize; /* Capitalize the text */
   color: #ffffff; /* Text color */
-  background-color: #4caf50; /* Attractive green background */
+  background-color: #2C466A; /* Attractive green background */
   border: none; /* Remove default border */
   border-radius: 1.2rem; /* Rounded corners for a modern look */
   cursor: pointer; /* Pointer cursor on hover */
@@ -103,14 +181,14 @@ button {
 
 button:hover {
   /* Hover Effect */
-  background-color: #45a049; /* Slightly darker green */
+  background-color: #2C466A; /* Slightly darker green */
   box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2); /* More pronounced shadow */
   transform: translateY(-3px); /* Slight lift effect */
 }
 
 button:active {
   /* Active State */
-  background-color: #388e3c; /* Even darker green */
+  background-color: #86c4e0; /* Even darker green */
   transform: translateY(1px); /* Pressed effect */
 }
 
@@ -120,6 +198,7 @@ button:active {
   gap: 1.5rem; /* Space between buttons */
   flex-wrap: wrap; /* Allow buttons to wrap on smaller screens */
   justify-content: center; /* Center-align buttons */
+  /* margin-left: 6px; */
 }
 /* 
 .button {
@@ -172,6 +251,11 @@ button:active {
 /***** End Hero  *****/
 
 
+.description {
+  margin-top:10px ;
+  margin-bottom: auto;
+
+}
 
 /* Reset */
 * {
@@ -211,7 +295,7 @@ nav ul li a {
 }
 
 nav ul li a:hover {
-  color: #4caf50;
+  color:#2C466A;
 }
 
 /* Hero Section */
@@ -227,14 +311,14 @@ nav ul li a:hover {
   max-width: 600px;
 }
 /* Gradient Styling for H1 */
-.hero-content h1 {
+.hero-content h2 {
   font-size: 3rem; /* Adjust as needed */
   font-weight: bold;
-  background: linear-gradient(90deg, navy, gray, white, black);
+  background: linear-gradient(135deg, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.6));
   -webkit-background-clip: text; /* Makes the gradient apply to the text */
   -webkit-text-fill-color: transparent; /* Makes the rest of the text transparent */
   text-align: center; /* Center-align the text */
-  margin: 0; /* Reset default margins */
+  /* margin: 0; Reset default margins */
   padding: 10px 0; /* Add some space around */
 }
 
@@ -276,24 +360,41 @@ nav ul li a:hover {
 
 }
 
-.hero-buttons {
-  display: flex;
-  gap: 1rem;
+.hero-buttons a.btn{
+  /* display: flex;
+  gap: 1rem; */
+  background-color: transparent; /* Transparent background */
+  color:  #5070a5;/* Green text */
+  padding: 5px 15px; /* Button padding */
+  border: 1.5px solid #86c4e0;; /* Green border */
+  border-radius: 5px; /* Rounded corners */
+  text-decoration: none; /* Remove underline */
+  font-size: 1.5rem; /* Font size */
+  font-weight: bold; /* Bold text */
+  text-transform: uppercase; /* Uppercase text */
+  transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease; /* Add hover effect */
 }
 
-.btn {
-  background-color: #4caf50;
-  color: white;
-  padding: 0.8rem 2rem;
-  text-decoration: none;
-  border-radius: 1rem;
-  font-weight: bold;
-  transition: background-color 0.3s ease;
+.button-container {
+  display: block; /* Makes the button a block element */
+  margin: 0 auto; /* Centers the button horizontally */
+  padding: 10px 20px; /* Adjust padding for button size */
+  background-color: #0D1F56; /* Dark attractive navy blue */
+  color: #fff; /* White text for contrast */
+  font-size: 1rem; /* Adjust font size */
+  font-weight: bold; /* Make the text bold */
+  margin-left: 180px; /* Remove default border */
+  border-radius: 5px; /* Rounded corners for aesthetics */
+  text-align: center; /* Ensures text inside button is centered */
+  cursor: pointer; /* Changes cursor to pointer on hover */
+  transition: background-color 0.3s ease, transform 0.2s ease; /* Adds hover effects */
 }
 
-.btn:hover {
-  background-color: #45a049;
+.button-container:hover {
+  background-color: #1A306B; /* Slightly lighter blue on hover */
+  transform: scale(1.05); /* Grows slightly on hover */
 }
+
 
 /* Hero Image */
 .hero-image img {
@@ -407,7 +508,7 @@ footer {
 /* Icon styling */
 .icon {
   font-size: 2.5rem;
-  color: #4caf50;
+  color: #86c4e0;
   margin-bottom: 1rem;
 }
 

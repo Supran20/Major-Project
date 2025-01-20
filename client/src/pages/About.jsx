@@ -13,7 +13,7 @@ export const About = () => {
             <div className="hero-content">
               {/* <p>We care to cure your Health</p> */}
 
-              <h1 class="heading-highlight">Why Choose Us?</h1>
+              <h2 class="heading-highlight">Why Choose Us?</h2>
               <section class="expertise-section">
                 <div class="feature">
                   <i class="icon fas fa-user-tie"></i>
