@@ -30,7 +30,13 @@ h1 {
   font-weight: bold;
 }
 
-p,
+p{
+  /* margin-bottom: 10rem; */
+  font-size: 1.8rem;
+  line-height: 1.56;
+  letter-spacing: 0.1rem;
+  word-spacing: 0.06rem;
+}
 li,
 label,
 input,
@@ -118,8 +124,7 @@ li {
   text-decoration: none; /* Remove underline */
   font-size: 1.5rem; /* Font size */
   font-weight: bold; /* Bold text */
-  margin-top: 50px;
- 
+  margin-top: 50rem;
   margin-left: 250px;
   text-transform: uppercase; /* Uppercase text */
   text-align: center;

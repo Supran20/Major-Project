@@ -6,9 +6,9 @@ export const ProductCard = () => {
 
   return (
     <section className="section-cards">
-      <div className="container">
-        <h1 className="main-heading">Glasses Cards</h1>
-      </div>
+      {/* <div className="container">
+        {/* <h1 className="main-heading">Sunglasses Collection</h1> */}
+      {/* </div> */} 
 
       <div className="container grid grid-three-cols">
         {cards && cards.length > 0 ? (
@@ -16,23 +16,18 @@ export const ProductCard = () => {
             return (
               <div className="card" key={index}>
                 <div className="card-img">
-                  {/* Dynamically render the image */}
                   <img
                     src={curElem.imageURL || "/images/default.jpg"}
                     alt={curElem.Name}
-                    width="400"
+                    style={{ width: "100%", objectFit: "contain" }}
                   />
                 </div>
                 <div className="card-details">
-                  <div className="grid grid-two-cols">
-                    <p>Stock: {curElem.Stock}</p>
-                    <p>Rs {curElem.Market_Price}</p>
+                  <h2 className="product-name">{curElem.Name}</h2>
+                  <div className="price-section">
+                    <p className="old-price">Rs {curElem.Market_Price}</p>
+                    <p className="new-price">Rs {curElem.Selling_Price}</p>
                   </div>
-                  <h2>{curElem.Name}</h2>
-                  <p>Pieces Sold: {curElem.Pieces_sold}</p>
-                  <p>Color: {curElem.Color}</p>
-                  <p>Feature: {curElem.Feature}</p>
-                  <p>Material: {curElem.Material}</p>
                 </div>
               </div>
             );
@@ -41,6 +36,69 @@ export const ProductCard = () => {
           <p>No cards available.</p>
         )}
       </div>
+
+      <style jsx>{`
+        .section-cards {
+          padding: 2rem 0;
+          font-family: Arial, sans-serif;
+        }
+        .container {
+          max-width: 1200px;
+          margin: auto;
+          padding: 0 1rem;
+        }
+        .main-heading {
+          text-align: center;
+          margin-bottom: 2rem;
+          font-size: 2rem;
+        }
+        .grid {
+          display: grid;
+          gap: 2rem;
+        }
+        .grid-three-cols {
+          grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        }
+        .card {
+          border: 1px solid #ddd;
+          border-radius: 8px;
+          overflow: hidden;
+          box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+          transition: transform 0.2s ease;
+        }
+        .card:hover {
+          transform: scale(1.02);
+        }
+        .card-img img {
+          max-height: 200px;
+          margin: 0 auto;
+          display: block;
+        }
+        .card-details {
+          padding: 1rem;
+          text-align: center;
+        }
+        .product-name {
+          font-size: 2rem;
+          font-weight: bold;
+          margin-bottom: 0.5rem;
+        }
+        .price-section {
+          display: flex;
+          justify-content: center;
+          gap: 1rem;
+          align-items: baseline;
+        }
+        .old-price {
+          text-decoration: line-through;
+          color: #888;
+        }
+        .new-price {
+          font-size: 1.5rem;
+          color: #e63946;
+          font-weight: bold;
+        }
+      `}</style>
     </section>
   );
 };
