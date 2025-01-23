@@ -8,7 +8,7 @@ export const ProductCard = () => {
     <section className="section-cards">
       {/* <div className="container">
         {/* <h1 className="main-heading">Sunglasses Collection</h1> */}
-      {/* </div> */} 
+      {/* </div> */}
 
       <div className="container grid grid-three-cols">
         {cards && cards.length > 0 ? (
@@ -26,7 +26,7 @@ export const ProductCard = () => {
                   <h2 className="product-name">{curElem.Name}</h2>
                   <div className="price-section">
                     <p className="old-price">Rs {curElem.Market_Price}</p>
-                    <p className="new-price">Rs {curElem.Selling_Price}</p>
+                    <p className="new-price">Rs {curElem.new_Market_Price}</p>
                   </div>
                 </div>
               </div>
