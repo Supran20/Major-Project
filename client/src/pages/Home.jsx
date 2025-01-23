@@ -6,6 +6,7 @@ export const Home = () => {
   return (
     <>
       <main>
+        
         {/* Carousel Section with Centered Text */}
         <section className="section-hero">
           <Carousel fade>
