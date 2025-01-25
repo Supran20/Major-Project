@@ -724,3 +724,26 @@ footer {
 }
 
 
+.product-details-page {
+  max-width: 800px;
+  margin: auto;
+  text-align: center;
+  padding: 2rem;
+}
+
+.product-img {
+  width: 100%;
+  max-width: 400px;
+  height: auto;
+  margin-bottom: 1rem;
+}
+.price {
+  color: #666;
+  text-decoration: line-through;
+  margin-right: 8px;
+}
+
+.discounted-price {
+  color: #ff0000;
+  font-weight: bold;
+}
