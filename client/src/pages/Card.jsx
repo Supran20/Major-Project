@@ -6,15 +6,9 @@ export const ProductCard = () => {
 
   return (
     <section className="section-cards">
-<<<<<<< HEAD
       <div className="container">
         <h1 className="main-heading">Exclusive Sunglasses Collection</h1>
       </div>
-=======
-      {/* <div className="container">
-        {/* <h1 className="main-heading">Sunglasses Collection</h1> */}
-      {/* </div> */}
->>>>>>> c8ea531a9116b1f328d81455ce93f638941a8f71
 
       <div className="container grid grid-three-cols">
         {cards && cards.length > 0 ? (
@@ -34,17 +28,10 @@ export const ProductCard = () => {
                   />
                 </div>
                 <div className="card-details">
-<<<<<<< HEAD
-                  <h2 className="product-title">{curElem.Name}</h2>
-                  <div className="price-info">
-                    <p className="original-price">Rs {curElem.Original_Price}</p>
-                    <p className="discounted-price">Rs {curElem.Market_Price}</p>
-=======
                   <h2 className="product-name">{curElem.Name}</h2>
                   <div className="price-section">
                     <p className="old-price">Rs {curElem.Market_Price}</p>
                     <p className="new-price">Rs {curElem.new_Market_Price}</p>
->>>>>>> c8ea531a9116b1f328d81455ce93f638941a8f71
                   </div>
                 </div>
               </div>
