@@ -1,7 +1,8 @@
+import React from "react";
 import { useParams } from "react-router-dom";
 import { useAuth } from "../store/auth";
 
-export const ProductDetail = () => {
+const ProductDetail = () => {
   const { name } = useParams(); // Get the product name from the URL
   const { cards } = useAuth();
 
@@ -13,105 +14,83 @@ export const ProductDetail = () => {
   }
 
   return (
-    <section className="product-detail-section py-10">
-      <div className="container mx-auto px-4">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
+    <div className="page-container">
+      <div className="card">
+        <div className="content-container">
           {/* Product Image */}
-          <div>
+          <div className="image-container">
             <img
-              src={product.imageURL || "/images/cat-eye-sunglasses.jpg"}
+              src={product.imageURL || "/images/default-product.jpg"} // Use product's image URL
               alt={product.Name}
-              className="w-full h-auto rounded-lg shadow-lg"
+              className="product-image"
             />
           </div>
 
           {/* Product Details */}
-          <div className="product-info space-y-6">
-            <h1 className="text-3xl font-bold text-gray-800">{product.Name}</h1>
-            <p className="text-xl font-semibold text-red-500">
-              Rs {product.Market_Price}{" "}
-              <span className="text-gray-500 line-through text-lg">
-                Rs {product.Original_Price}
-              </span>
-            </p>
+          <div className="details-container">
+            <h1 className="product-title">{product.Name}</h1>
+            <p className="product-size">Size: {product.Size || "Standard"}</p>
+
+            <div className="product-price">
+              Rs.{product.new_Market_Price}{" "}
+              {/* <span className="original-price">
+                Rs.{product.Original_Price}
+              </span> */}
+            </div>
+
+            <button className="button primary-button">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="icon"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2 9h10m0 0l-2-9m2 9h4m0 0a1 1 0 11-2 0m2 0a1 1 0 11-2 0"
+                />
+              </svg>
+              Select Lenses
+            </button>
+
+            <button className="button secondary-button">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="icon"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M15 10l4.586-4.586A2 2 0 1015 10zm1.414 1.414L14 12.828V14h1.172l1.414-1.414zM5 7h1.172L12 12.828V14h2v-1.172l5-5V7h1.172L19 5H5v2zm2.828 10H5v-2.828L7 12.828V14h1.172l-1.414 1.414z"
+                />
+              </svg>
+              Try On
+            </button>
 
             {/* Technical Information */}
-            <div>
-              <h2 className="text-lg font-semibold text-gray-700">
-                Technical Information:
-              </h2>
-              <ul className="list-disc list-inside text-gray-600 space-y-1">
-                <li>Frame Material: PC</li>
-                <li>Temple Material: PC</li>
-                <li>Frame Shape: Wraparound</li>
-                <li>Lens: Polarized</li>
-                <li>Model No.: NS-20232</li>
-                <li>Frame Size: 68-13-132</li>
-                <li>Color: Matte Black</li>
+            <div className="technical-info">
+              <h2>Technical Information</h2>
+              <p>Product ID: {product.ID || "N/A"}</p>
+              <p>Model No.: {product.Model_No || "N/A"}</p>
+              <ul>
+                <li>Material: {product.Material || "Not specified"}</li>
+                <li>Lens Type: {product.Lens_Type || "Not specified"}</li>
+                <li>Color: {product.Color || "Not specified"}</li>
+                <li>Frame Size: {product.Frame_Size || "Not specified"}</li>
               </ul>
-            </div>
-
-            {/* SKU, Categories, and Tags */}
-            <div>
-              <p>
-                <strong className="font-medium text-gray-700">SKU:</strong>{" "}
-                {product.SKU || "NS-20232-C2"}
-              </p>
-              <p>
-                <strong className="font-medium text-gray-700">Categories:</strong>{" "}
-                Material, Men's Sunglasses, Polarized Sunglasses, PC Frame
-              </p>
-              <p>
-                <strong className="font-medium text-gray-700">Tags:</strong>{" "}
-                best matte black sunglasses, UV protection, outdoor sports eyewear
-              </p>
-            </div>
-
-            {/* Stock Availability */}
-            <p className="text-green-600 font-medium">
-              {product.stock || 3} in stock
-            </p>
-
-            {/* Add to Cart Section */}
-            <div className="flex items-center space-x-4">
-              <input
-                type="number"
-                min="1"
-                defaultValue="1"
-                className="w-16 border rounded-lg text-center"
-              />
-              <button className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700">
-                Add to Cart
-              </button>
             </div>
           </div>
         </div>
-
-        {/* Additional Thumbnails */}
-        <div className="mt-10 grid grid-cols-4 gap-4">
-          {product.additionalImages?.map((img, idx) => (
-            <img
-              key={idx}
-              src={img}
-              alt={`Thumbnail ${idx + 1}`}
-              className="w-full h-auto rounded-lg shadow-md cursor-pointer"
-            />
-          )) || (
-            <>
-              {/* <img
-                src="/images/cat-eye-sunglasses.jpg"
-                alt="Default Image 1"
-                className="w-full h-auto rounded-lg shadow-md"
-              />
-              <img
-                src="/images/cat-eye-sunglasses.jpg"
-                alt="Default Image 2"
-                className="w-full h-auto rounded-lg shadow-md"
-              /> */}
-            </>
-          )}
-        </div>
       </div>
-    </section>
+    </div>
   );
 };
+
+export default ProductDetail;
