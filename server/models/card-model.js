@@ -1,3 +1,15 @@
+// // models/card.js
+// const mongoose = require('mongoose');
+
+// const cardSchema = new mongoose.Schema({
+//   name: String,
+//   image: String,
+//   // Any other fields related to a card
+// });
+
+// const Card = mongoose.model('Card', cardSchema);
+// module.exports = Card;
+
 const { Schema, model } = require("mongoose");
 
 const cardSchema = new Schema({
