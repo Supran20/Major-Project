@@ -15,7 +15,7 @@ import { AdminContacts } from "./pages/Admin-Contacts";
 import { AdminUpdate } from "./pages/Admin-Update";
 import { AdminStatus } from "./pages/Admin-Status";
 import { GlassDetails } from "./pages/GlassDetails";
-import {ProductDetail} from "./pages/ProductDetails";
+import ProductDetail from "./pages/ProductDetails";
 
 //subscribe Suprantechnical channel for more awesome content.
 
