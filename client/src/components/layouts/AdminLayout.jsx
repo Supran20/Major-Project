@@ -41,8 +41,10 @@ export const AdminLayout = () => {
                 Inventory
               </li>
               <li>
-                <IoAnalytics />
-                Analytics
+                <NavLink to="/admin/analytics">
+                  <IoAnalytics />
+                  Analytics
+                </NavLink>
               </li>
               <li>
                 <NavLink to="/admin/status">

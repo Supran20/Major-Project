@@ -1,44 +1,77 @@
-import numpy as np
 import pandas as pd
-import random
-from sklearn.ensemble import VotingRegressor
+from datetime import datetime
 import joblib
 
-# Load the saved ensemble model
-ensemble_model = joblib.load("ensemble_model.pkl")
+# Load the ensemble model
+try:
+    ensemble_model = joblib.load("ensemble_model.pkl")
+    print(f"Loaded model type: {type(ensemble_model)}")
+except Exception as e:
+    print(f"Error loading model: {e}")
+    raise
 
-def calculate_random_optimized_price(date, product_id, market_price, base_price):
-    # Percentage changes to apply to the market price
-    percentage_changes = [0, 5, 10, 15, 20]
-    adjusted_prices = [market_price * (1 + pct / 100) for pct in percentage_changes] + \
-                      [market_price * (1 - pct / 100) for pct in percentage_changes if pct != 0]
+def calculate_optimized_price(product_id, market_price, date):
+    # Convert date into day, month, and year
+    date_obj = datetime.strptime(date, "%Y-%m-%d")
+    day, month, year = date_obj.day, date_obj.month, date_obj.year
+
+    # Adjustments to test
+    adjustments = [0, 0.05, 0.10, 0.15, 0.20]
+    results = pd.DataFrame(columns=["Adjusted_Price", "Predicted_Quantity", "Revenue", "Adjustment_Percentage"])
+
+    for adjustment in adjustments:
+        for direction in [1, -1]:
+            # Calculate adjusted price based on the percentage adjustment
+            adjusted_price = market_price * (1 + direction * adjustment)
+            
+            # Prepare input data for prediction
+            input_data = pd.DataFrame({
+                'Product_ID': [product_id],
+                'Market_Price': [adjusted_price],
+                'Day': [day],
+                'Month': [month],
+                'Year': [year]
+            })
+
+            # Predict quantity
+            try:
+                predicted_quantity = ensemble_model.predict(input_data)[0]
+            except Exception as e:
+                print(f"Error during prediction: {e}")
+                raise
+
+            # Calculate revenue
+            revenue = adjusted_price * predicted_quantity
+            
+            # Record the adjustment percentage and corresponding details
+            adjustment_percentage = direction * adjustment * 100  # Convert to percentage
+            new_row = pd.DataFrame({
+                "Adjusted_Price": [adjusted_price],
+                "Predicted_Quantity": [predicted_quantity],
+                "Revenue": [revenue],
+                "Adjustment_Percentage": [adjustment_percentage]
+            })
+
+            results = pd.concat([results, new_row], ignore_index=True)
+
+    # Display all the results for comparison
+    print("\nPrice and Revenue Comparison:")
+    print(results)
+
+    # Find the optimal price based on highest revenue
+    optimal_row = results.loc[results["Revenue"].idxmax()]
     
-    # Track corresponding percentage labels
-    percentage_labels = [f"+{pct}%" for pct in percentage_changes] + \
-                        [f"-{pct}%" for pct in percentage_changes if pct != 0]
-    
-    # Select a random index
-    random_index = random.randint(0, len(adjusted_prices) - 1)
-    random_price = adjusted_prices[random_index]
-    random_label = percentage_labels[random_index]
-    
-    # Prepare input data for prediction
-    input_data = pd.DataFrame({
-        "Product_ID": [product_id],
-        "Market_Price": [random_price],
-        "Base_Price": [base_price]
-    })
+    print("\nOptimized Price Details:")
+    print(f"Adjusted Price: {optimal_row['Adjusted_Price']:.2f}")
+    print(f"Predicted Quantity: {optimal_row['Predicted_Quantity']:.2f}")
+    print(f"Revenue: {optimal_row['Revenue']:.2f}")
+    print(f"Adjustment Percentage: {optimal_row['Adjustment_Percentage']:.2f}%")
 
-    # Predict quantity for the selected random price
-    predicted_quantity = ensemble_model.predict(input_data)[0]
+    return optimal_row["Adjusted_Price"]
 
-    # Calculate revenue
-    revenue = random_price * predicted_quantity
-
-    # Output the result
-    print(f"Optimized Market Price: {random_price} ({random_label})")
-    print(f"Predicted Quantity: {predicted_quantity}")
-    print(f"Revenue: {revenue}")
-
-# Example Usage
-calculate_random_optimized_price(date="2025-01-22", product_id=1, market_price=1000, base_price=900)
+# Example usage
+try:
+    optimized_price = calculate_optimized_price(product_id=3, market_price=3000, date="2025-01-22")
+    print(f"\nOptimized Marked Price: {optimized_price:.2f}")
+except Exception as e:
+    print(f"An error occurred: {e}")
