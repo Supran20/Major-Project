@@ -15,7 +15,7 @@ export const Home = () => {
                 src="/images/FREEPICK-3.avif" // Add a valid image path here
                 alt="First slide"
                 width="100%"
-                height="500"
+                height="900"
               />
               <Carousel.Caption className="carousel-caption">
                 <div className="hero-content">
@@ -37,7 +37,7 @@ export const Home = () => {
                 src="/images/FREEPICK-1.jpg" // Add a valid image path here
                 alt="Second slide"
                 width="100%"
-                height="500"
+                height="900"
               />
               <Carousel.Caption className="carousel-caption">
                 <div className="hero-content">
@@ -59,7 +59,7 @@ export const Home = () => {
                 src="/images/UNSPLASH-1.jpeg" // Add a valid image path here
                 alt="Third slide"
                 width="100%"
-                height="500"
+                height="900"
               />
               <Carousel.Caption className="carousel-caption">
                 <div className="hero-content">
@@ -110,9 +110,7 @@ export const Home = () => {
                         preference.
                       </p>
 
-                      <a href="/book-appointment" className="try-on ">
-                          Try-on
-                        </a>
+                     
                     </div>
 
                     <div>

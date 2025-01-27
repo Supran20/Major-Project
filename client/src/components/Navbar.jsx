@@ -55,6 +55,7 @@ export const Navbar = () => {
                   Sunglasses
                 </NavLink>
               </li>
+          
               
               <li>
                 <NavLink to="/contact" className="nav-link">
@@ -83,6 +84,11 @@ export const Navbar = () => {
 
                 </>
               )}
+              <li>
+                <NavLink to="http://127.0.0.1:8000/try_on" className="nav-link login-button try_btn">
+                  Try On
+                </NavLink>
+              </li>
             </ul>
           </nav>
         </div>
