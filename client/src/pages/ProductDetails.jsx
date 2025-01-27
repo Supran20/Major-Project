@@ -32,10 +32,17 @@ const ProductDetail = () => {
             <p className="product-size">Size: {product.Size || "Standard"}</p>
 
             <div className="product-price">
-              Rs.{product.new_Market_Price}{" "}
-              {/* <span className="original-price">
-                Rs.{product.Original_Price}
-              </span> */}
+              {/* Price Display Logic */}
+              {product.new_Market_Price < product.Market_Price ? (
+                <>
+                  <span className="original-price">
+                    Rs.{product.Market_Price}
+                  </span>
+                  Rs.{product.new_Market_Price}
+                </>
+              ) : (
+                <span className="normal-price">Rs.{product.Market_Price}</span>
+              )}
             </div>
 
             <button className="button primary-button">
@@ -77,14 +84,15 @@ const ProductDetail = () => {
             {/* Technical Information */}
             <div className="technical-info">
               <h2>Technical Information</h2>
-              <p>Product ID: {product.ID || "N/A"}</p>
-              <p>Model No.: {product.Model_No || "N/A"}</p>
-              <ul>
+              <p>Product ID: {product._id || "N/A"}</p>
+              <p>Lens Type: {product.Feature || "N/A"}</p>
+              <p>Material: {product.Material || "Not specified"}</p>
+              {/* <ul>
                 <li>Material: {product.Material || "Not specified"}</li>
                 <li>Lens Type: {product.Lens_Type || "Not specified"}</li>
-                <li>Color: {product.Color || "Not specified"}</li>
-                <li>Frame Size: {product.Frame_Size || "Not specified"}</li>
-              </ul>
+                {/* <li>Color: {product.Color || "Not specified"}</li> */}
+              {/* <li>Frame Size: {product.Frame_Size || "Not specified"}</li>
+              </ul> */}
             </div>
           </div>
         </div>
