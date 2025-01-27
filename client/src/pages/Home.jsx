@@ -25,7 +25,7 @@ export const Home = () => {
                   {/* <a href="/card" className="virtual-try-on">
                     Virtual Try-On
                   </a> */}
-                  <a href="/shop" class="shop-now">
+                  <a href="/card" class="shop-now">
                     Shop Now
                   </a>
                 </div>
@@ -47,7 +47,7 @@ export const Home = () => {
                   {/* <a href="/card" className="virtual-try-on">
                     Virtual Try-On
                   </a> */}
-                  <a href="/shop" class="shop-now">
+                  <a href="/card" class="shop-now">
                     Shop Now
                   </a>
                 </div>
@@ -69,7 +69,7 @@ export const Home = () => {
                   {/* <a href="/card" className="virtual-try-on">
                     Virtual Try-On
                   </a> */}
-                  <a href="/shop" class="shop-now">
+                  <a href="/card" class="shop-now">
                     Shop Now
                   </a>
                 </div>

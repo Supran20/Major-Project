@@ -1,20 +1,29 @@
 import pandas as pd
-import numpy as np
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import ElasticNet
 from sklearn.ensemble import RandomForestRegressor
 from xgboost import XGBRegressor
 from sklearn.neural_network import MLPRegressor
-from sklearn.metrics import mean_squared_error
 from sklearn.ensemble import VotingRegressor
 import joblib
 
 # Load the generated dataset
-df = pd.read_csv("price_demand_dataset_cyclical_quantities.csv")
+df = pd.read_csv("generate_ml_2.csv")
+
+# Convert 'Date' to datetime format
+df["Date"] = pd.to_datetime(df["Date"], errors='coerce')
 
 # Feature selection
-X = df[["Product_ID", "Market_Price", "Base_Price"]]
-y = df["Quantity_Demanded"]
+X = df[["Product_ID", "Market_Price"]]  # Include Product_ID and Market_Price as features
+y = df["Quantity"]  # The target is Quantity_Demanded
+
+# Extracting features from 'Date' (e.g., day, month, year) using .loc to avoid SettingWithCopyWarning
+X.loc[:, "Day"] = df["Date"].dt.day
+X.loc[:, "Month"] = df["Date"].dt.month
+X.loc[:, "Year"] = df["Date"].dt.year
+
+# Drop the original 'Date' column from df before using it
+df = df.drop(columns=["Date"])
 
 # Train-test split
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
@@ -43,27 +52,3 @@ joblib.dump(mlp, "mlp_model.pkl")  # Save model
 ensemble = VotingRegressor([("elastic_net", elastic_net), ("rf", rf), ("xgb", xgb), ("mlp", mlp)])
 ensemble.fit(X_train, y_train)
 joblib.dump(ensemble, "ensemble_model.pkl")  # Save ensemble model
-
-# Evaluate Ensemble Model
-y_pred_ensemble = ensemble.predict(X_test)
-mse_ensemble = mean_squared_error(y_test, y_pred_ensemble)
-print(f"Ensemble Model MSE: {mse_ensemble}")
-
-# 6. Using Saved Models to Predict
-# Load saved models
-loaded_elastic_net = joblib.load("elastic_net_model.pkl")
-loaded_rf = joblib.load("random_forest_model.pkl")
-loaded_xgb = joblib.load("xgboost_model.pkl")
-loaded_mlp = joblib.load("mlp_model.pkl")
-loaded_ensemble = joblib.load("ensemble_model.pkl")
-
-# Sample data for prediction
-sample_data = pd.DataFrame({
-    "Product_ID": [1, 2, 3],
-    "Market_Price": [1000, 2500, 3500],
-    "Base_Price": [900, 2300, 3200]
-})
-
-# Make predictions using the saved ensemble model
-sample_predictions = loaded_ensemble.predict(sample_data)
-print("Predictions for Sample Data:", sample_predictions)

@@ -25,6 +25,10 @@ router
   .get(authMiddleware, adminMiddleware, adminController.getSalesData);
 
 router
+  .route("/analytics/:glassName")
+  .get(authMiddleware, adminMiddleware, adminController.getSalesData);
+
+router
   .route("/users/delete/:id")
   .delete(authMiddleware, adminMiddleware, adminController.deleteUserById);
 

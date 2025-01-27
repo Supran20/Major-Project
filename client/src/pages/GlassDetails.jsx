@@ -75,9 +75,6 @@ export const GlassDetails = () => {
                   <th>Stock</th>
                   <th>No. of Reviewers</th>
                   <th>Pieces Sold</th>
-                  <th>Gender</th>
-                  <th>Feature</th>
-                  <th>Color</th>
                   <th>Base Price</th>
                   <th>Market Price</th>
                   <th>Timestamp</th> {/* New column for Timestamp */}
@@ -122,9 +119,6 @@ export const GlassDetails = () => {
                       <td>{glass.Stock || "N/A"}</td>
                       <td>{glass.No_of_Reviewers || "N/A"}</td>
                       <td>{glass.Pieces_sold || "N/A"}</td>
-                      <td>{glass.Gender || "N/A"}</td>
-                      <td>{glass.Feature || "N/A"}</td>
-                      <td>{glass.Color || "N/A"}</td>
                       <td>{glass.Base_Price || "N/A"}</td>
                       <td>
                         {glass.Market_Price || "N/A"}{" "}
