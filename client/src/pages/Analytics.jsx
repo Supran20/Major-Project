@@ -1,6 +1,28 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom"; // Get `glassName` from URL params
 import { useAuth } from "../store/auth"; // Ensure you have this hook for managing authentication
+import { Line } from "react-chartjs-2"; // Import Line Chart from Chart.js
+import {
+  Chart as ChartJS,
+  LineElement,
+  PointElement,
+  CategoryScale,
+  LinearScale,
+  Title,
+  Tooltip,
+  Legend,
+} from "chart.js";
+
+// Register Chart.js components
+ChartJS.register(
+  LineElement,
+  PointElement,
+  CategoryScale,
+  LinearScale,
+  Title,
+  Tooltip,
+  Legend
+);
 
 export const Analytics = () => {
   const { glassName } = useParams(); // Get glass name from URL
@@ -56,6 +78,42 @@ export const Analytics = () => {
     }
   }, [collectionName]);
 
+  // Prepare data for Chart.js
+  const chartData = {
+    labels: glassData.map((glass) => `Sold: ${glass.Pieces_sold || "N/A"}`), // X-axis labels
+    datasets: [
+      {
+        label: "Market Price",
+        data: glassData.map((glass) => glass.Market_Price || 0), // Y-axis values
+        borderColor: "blue",
+        backgroundColor: "rgba(0, 0, 255, 0.2)",
+        pointBackgroundColor: "blue",
+        fill: true,
+      },
+    ],
+  };
+
+  const chartOptions = {
+    responsive: true,
+    maintainAspectRatio: false,
+    scales: {
+      x: {
+        title: {
+          display: true,
+          text: "Pieces Sold",
+          font: { size: 14 },
+        },
+      },
+      y: {
+        title: {
+          display: true,
+          text: "Market Price",
+          font: { size: 14 },
+        },
+      },
+    },
+  };
+
   return (
     <section className="admin-glasses-section">
       <div className="container">
@@ -68,69 +126,8 @@ export const Analytics = () => {
           <p>No data available for {glassName}.</p>
         )}
         {!isLoading && !error && glassData.length > 0 && (
-          <div className="table-container">
-            <table className="glass-details-table">
-              <thead>
-                <tr>
-                  <th>Stock</th>
-                  <th>No. of Reviewers</th>
-                  <th>Pieces Sold</th>
-                  <th>Base Price</th>
-                  <th>Market Price</th>
-                  <th>Timestamp</th> {/* New column for Timestamp */}
-                </tr>
-              </thead>
-              <tbody>
-                {glassData.map((glass, index) => {
-                  const prevMarketPrice =
-                    index > 0 ? glassData[index - 1]?.Market_Price : null;
-                  let priceArrow = null;
-
-                  if (prevMarketPrice !== null) {
-                    if (glass.Market_Price > prevMarketPrice) {
-                      priceArrow = (
-                        <span
-                          style={{
-                            color: "green",
-                            fontSize: "1.5rem",
-                            fontWeight: "bold",
-                          }}
-                        >
-                          ▲
-                        </span>
-                      );
-                    } else if (glass.Market_Price < prevMarketPrice) {
-                      priceArrow = (
-                        <span
-                          style={{
-                            color: "red",
-                            fontSize: "1.5rem",
-                            fontWeight: "bold",
-                          }}
-                        >
-                          ▼
-                        </span>
-                      );
-                    }
-                  }
-
-                  return (
-                    <tr key={glass._id || glass.No_of_Reviewers}>
-                      <td>{glass.Stock || "N/A"}</td>
-                      <td>{glass.No_of_Reviewers || "N/A"}</td>
-                      <td>{glass.Pieces_sold || "N/A"}</td>
-                      <td>{glass.Base_Price || "N/A"}</td>
-                      <td>
-                        {glass.Market_Price || "N/A"}{" "}
-                        <span style={{ marginLeft: "10px" }}>{priceArrow}</span>
-                      </td>
-                      <td>{glass.Timestamp || "N/A"}</td>{" "}
-                      {/* Use Timestamp from database */}
-                    </tr>
-                  );
-                })}
-              </tbody>
-            </table>
+          <div style={{ width: "100%", height: "400px" }}>
+            <Line data={chartData} options={chartOptions} />
           </div>
         )}
       </div>
