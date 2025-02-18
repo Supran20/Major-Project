@@ -7,14 +7,20 @@ export const AdminAnalytics = () => {
       name: "Blue Light Blocking Glasses",
       link: "blue-light-blocking-glasses",
     },
-    { name: "Aviator Glasses", link: "aviator-glasses" },
-    { name: "Oversized Glasses", link: "oversized-glasses" },
-    { name: "Retro Round Glasses", link: "retro-round-glasses" },
+    { name: "Classic Aviator Glasses", link: "classic-aviator-glasses" },
+    {
+      name: "Lightweight Titanium Glasses",
+      link: "lightweight-titanium-glasses",
+    },
+    { name: "Polarized Sports Glasses", link: "polarized-sports-glasses" },
     { name: "Cat Eye Sunglasses", link: "cat-eye-sunglasses" },
-    { name: "Pilot Glasses", link: "pilot-glasses" },
-    { name: "Square Frame Glasses", link: "square-frame-glasses" },
-    { name: "Vintage Glasses", link: "vintage-glasses" },
-    { name: "Hexagonal Frame Glasses", link: "hexagonal-frame-glasses" },
+    {
+      name: "High Definition Reading Glasses",
+      link: "high-definition-reading-glasses",
+    },
+    { name: "Square Designer Frames", link: "square-designer-frames" },
+    { name: "Eco-Friendly Frames", link: "eco-friendly-frames" },
+    { name: "Vintage Round Glasses", link: "vintage-round-glasses" },
   ];
 
   return (

@@ -71,7 +71,7 @@ def calculate_optimized_price(product_id, market_price, date):
 
 # Example usage
 try:
-    optimized_price = calculate_optimized_price(product_id=3, market_price=3000, date="2025-01-22")
+    optimized_price = calculate_optimized_price(product_id=3, market_price=3415, date="2025-01-22")
     print(f"\nOptimized Marked Price: {optimized_price:.2f}")
 except Exception as e:
     print(f"An error occurred: {e}")
