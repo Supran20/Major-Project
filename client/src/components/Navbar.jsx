@@ -1,92 +1,86 @@
 import { NavLink } from "react-router-dom";
-import "./Navbar.css";
 import { useAuth } from "../store/auth";
 
 export const Navbar = () => {
   const { isLoggedIn } = useAuth();
+
   return (
-    <>
-      <header>
-        <div className="container">
-        <div className="logo-brand">
-  <NavLink to="/">
-    <span className="logo-text">VIU</span>
-  </NavLink>
-  <style jsx>{`
-    .logo-brand {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-family: 'Poppins', sans-serif;
-      padding: 0.5rem 1rem;
-    }
+    <header className="bg-gray-900 text-white shadow-md">
+      <div className="container mx-auto flex items-center justify-between py-4 px-6">
+        {/* Logo */}
+        <div className="text-3xl font-bold tracking-wide text-blue-400 hover:text-blue-300 transition-transform transform hover:scale-110">
+          <NavLink to="/">VIU</NavLink>
+        </div>
 
-    .logo-text {
-      font-size: 2rem;
-      font-weight: bold;
-      color:rgb(185, 214, 244); /* Attractive blue color */
-      text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
-      letter-spacing: 2px;
-      transition: transform 0.2s ease, color 0.2s ease;
-    }
+        {/* Navigation Links */}
+        <nav>
+          <ul className="flex space-x-6">
+            <li>
+              <NavLink
+                to="/"
+                className="text-lg hover:text-blue-300 transition"
+              >
+                Home
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                to="/about"
+                className="text-lg hover:text-blue-300 transition"
+              >
+                About Us
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                to="/card"
+                className="text-lg hover:text-blue-300 transition"
+              >
+                Sunglasses
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                to="/contact"
+                className="text-lg hover:text-blue-300 transition"
+              >
+                Contact
+              </NavLink>
+            </li>
 
-    .logo-text:hover {
-      color: #00b4d8; /* Slightly lighter blue on hover */
-      transform: scale(1.1); /* Slight zoom-in effect */
-    }
-  `}</style>
-</div>
-
-
-          <nav>
-            <ul>
+            {/* Authentication Buttons */}
+            {isLoggedIn ? (
               <li>
-                <NavLink to="/" className="nav-link">
-                  Home
+                <NavLink
+                  to="/logout"
+                  className="text-lg text-red-400 hover:text-red-300 transition"
+                >
+                  Logout
                 </NavLink>
               </li>
-              <li>
-                <NavLink to="/about" className="nav-link">
-                  About Us
-                </NavLink>
-              </li>
-              <li>
-                <NavLink to="/card" className="nav-link">
-                  Sunglasses
-                </NavLink>
-              </li>
-              
-              <li>
-                <NavLink to="/contact" className="nav-link">
-                  Contact
-                </NavLink>
-              </li>
-
-              {isLoggedIn ?(
+            ) : (
+              <>
                 <li>
-                  <NavLink to="/logout" className="nav-link">
-                    Logout
+                  <NavLink
+                    to="/register"
+                    className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition"
+                  >
+                    Register
                   </NavLink>
                 </li>
-              ) : (
-                <>
-                  <li>
-  <NavLink to="/register" className="nav-link register-button">
-    Register
-  </NavLink>
-</li>
-<li>
-  <NavLink to="/login" className="nav-link login-button">
-    Login
-  </NavLink>
-</li>
-
-                </>
-              )}
-            </ul>
-          </nav>
-        </div>
-      </header>
-    </>
+                <li>
+                  <NavLink
+                    to="/login"
+                    className="bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600 transition"
+                  >
+                    Login
+                  </NavLink>
+                </li>
+              </>
+            )}
+          </ul>
+        </nav>
+      </div>
+    </header>
   );
 };

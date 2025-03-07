@@ -11,7 +11,6 @@ import {
   Title,
   Tooltip,
   Legend,
-  TimeScale,
 } from "chart.js";
 
 // Register Chart.js components
@@ -20,7 +19,6 @@ ChartJS.register(
   PointElement,
   CategoryScale,
   LinearScale,
-  TimeScale,
   Title,
   Tooltip,
   Legend
@@ -30,7 +28,7 @@ export const Analytics = () => {
   const { glassName } = useParams();
   const [glassData, setGlassData] = useState([]);
   const [weeklyProfit, setWeeklyProfit] = useState(0);
-  const [piecesSoldLastWeek, setPiecesSoldLastWeek] = useState(0); // State for pieces sold in last week
+  const [piecesSoldLastWeek, setPiecesSoldLastWeek] = useState(0); // State for pieces sold in the last 7 entries
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const { authorizationToken } = useAuth();
@@ -66,7 +64,7 @@ export const Analytics = () => {
 
       const data = await response.json();
       setGlassData(data);
-      calculateWeeklyProfitAndPiecesSold(data); // Calculate profit and pieces sold in last week
+      calculateWeeklyProfitAndPiecesSold(data); // Calculate profit and pieces sold for the last 7 data entries
       setError(null);
     } catch (err) {
       console.error("Error fetching glass data:", err);
@@ -82,48 +80,37 @@ export const Analytics = () => {
     }
   }, [collectionName]);
 
-  // Function to calculate weekly profit and pieces sold for the last 7 days
+  // Function to calculate weekly profit and pieces sold from the last 7 entries
   const calculateWeeklyProfitAndPiecesSold = (data) => {
-    const currentDate = new Date();
-    const lastWeekDate = new Date(currentDate);
-    lastWeekDate.setDate(currentDate.getDate() - 7); // Calculate the date 7 days ago
+    let totalProfit = 0;
+    let totalPiecesSold = 0;
 
-    let profitByWeek = {};
-    let piecesSoldInLastWeek = 0; // To accumulate pieces sold in last 7 days
+    // Get the last 7 entries from the data
+    const lastSevenEntries = data.slice(-7);
 
-    data.forEach((glass) => {
-      const date = new Date(glass.Timestamp);
+    lastSevenEntries.forEach((glass) => {
+      // Calculate the total profit for the week
+      const profit =
+        (glass.Market_Price - glass.Base_Price) * (glass.Pieces_sold || 0);
+      totalProfit += profit;
 
-      if (date >= lastWeekDate) {
-        // Only consider data from the last 7 days
-        const weekStart = new Date(
-          date.setDate(date.getDate() - date.getDay())
-        ); // Get start of the week (Sunday)
-        const weekKey = weekStart.toISOString().split("T")[0]; // Format: YYYY-MM-DD
-
-        const profit =
-          (glass.Market_Price - glass.Base_Price) * (glass.Pieces_sold || 0);
-        profitByWeek[weekKey] = (profitByWeek[weekKey] || 0) + profit;
-
-        piecesSoldInLastWeek += glass.Pieces_sold || 0; // Accumulate pieces sold in the last week
-      }
+      // Accumulate total pieces sold in the last 7 entries
+      totalPiecesSold += glass.Pieces_sold || 0;
     });
 
-    // Get the most recent week's profit
-    const latestWeek = Object.keys(profitByWeek).sort().pop();
-    setWeeklyProfit(profitByWeek[latestWeek] || 0);
-    setPiecesSoldLastWeek(piecesSoldInLastWeek); // Set the total pieces sold in the last 7 days
+    setWeeklyProfit(totalProfit); // Set the total weekly profit
+    setPiecesSoldLastWeek(totalPiecesSold); // Set the total pieces sold in the last 7 entries
   };
 
   // Prepare data for Chart.js
   const chartData = {
-    labels: glassData.map(
-      (glass) => new Date(glass.Timestamp).toISOString().split("T")[0] // Extract only YYYY-MM-DD
+    labels: glassData.slice(-7).map(
+      (glass) => new Date(glass.Timestamp).toISOString().split("T")[0] // Extract only YYYY-MM-DD for last 7 entries
     ),
     datasets: [
       {
         label: "Market Price",
-        data: glassData.map((glass) => glass.Market_Price || 0),
+        data: glassData.slice(-7).map((glass) => glass.Market_Price || 0),
         borderColor: "blue",
         backgroundColor: "rgba(0, 0, 255, 0.2)",
         pointBackgroundColor: "blue",
@@ -154,28 +141,41 @@ export const Analytics = () => {
   };
 
   return (
-    <section className="admin-glasses-section">
-      <div className="container">
-        <h1 className="glass-details-title">
+    <section className="py-8 bg-gray-100">
+      <div className="container mx-auto px-4">
+        <h1 className="text-2xl font-bold text-center mb-6">
           Glasses Details: {glassName || "Loading..."}
         </h1>
-        {isLoading && <p>Loading data...</p>}
-        {error && <p className="error-message">Error: {error}</p>}
+        {isLoading && (
+          <p className="text-center text-gray-500">Loading data...</p>
+        )}
+        {error && (
+          <p className="text-center text-red-500 font-semibold mt-4">{`Error: ${error}`}</p>
+        )}
         {!isLoading && !error && glassData.length === 0 && (
-          <p>No data available for {glassName}.</p>
+          <p className="text-center text-gray-500">
+            No data available for {glassName}.
+          </p>
         )}
         {!isLoading && !error && glassData.length > 0 && (
           <>
-            <div style={{ width: "100%", height: "400px" }}>
+            <div className="w-full h-96 mt-6">
               <Line data={chartData} options={chartOptions} />
             </div>
-            <div className="weekly-profit">
-              <h2>Weekly Profit: NPR {weeklyProfit.toLocaleString()}</h2>
+            <div className="bg-white p-4 shadow-md rounded-lg mt-6">
+              <h2 className="text-xl font-semibold text-gray-700">
+                Weekly Profit:{" "}
+                <span className="text-green-500">
+                  NPR {weeklyProfit.toLocaleString()}
+                </span>
+              </h2>
             </div>
-            <div className="pieces-sold-last-week">
-              <h2>
-                Pieces Sold in Last 7 Days:{" "}
-                {piecesSoldLastWeek.toLocaleString()}
+            <div className="bg-white p-4 shadow-md rounded-lg mt-6">
+              <h2 className="text-xl font-semibold text-gray-700">
+                Pieces Sold in Last 7 Entries:{" "}
+                <span className="text-blue-500">
+                  {piecesSoldLastWeek.toLocaleString()}
+                </span>
               </h2>
             </div>
           </>

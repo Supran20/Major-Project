@@ -56,24 +56,25 @@ export const Contact = () => {
   };
 
   return (
-    <section className="section-contact">
-      <div className="contact-content container">
-        <h1 className="main-heading">Contact Us</h1>
+    <section className="section-contact bg-gray-100 py-16">
+      <div className="contact-content container mx-auto text-center mb-12">
+        <h1 className="text-4xl font-bold text-gray-900">Contact Us</h1>
       </div>
-      <div className="container grid grid-half-cols">
-        <div className="contact-img">
+      <div className="container mx-auto grid grid-cols-1 md:grid-cols-2 gap-12">
+        <div className="contact-img flex justify-center">
           <img
             src="/images/contact.png"
             alt="Always ready to help you"
-            width="400"
-            height="300"
+            className="w-full h-auto max-w-full rounded-lg shadow-lg"
           />
         </div>
 
-        <section className="section-form">
-          <form onSubmit={handleContactForm}>
-            <div>
-              <label htmlFor="username">Username</label>
+        <section className="section-form space-y-6">
+          <form onSubmit={handleContactForm} className="space-y-4">
+            <div className="space-y-2">
+              <label htmlFor="username" className="text-xl text-gray-800">
+                Username
+              </label>
               <input
                 type="text"
                 name="username"
@@ -82,11 +83,14 @@ export const Contact = () => {
                 onChange={handleInput}
                 autoCapitalize="off"
                 required
+                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-600"
               />
             </div>
 
-            <div>
-              <label htmlFor="email">Email</label>
+            <div className="space-y-2">
+              <label htmlFor="email" className="text-xl text-gray-800">
+                Email
+              </label>
               <input
                 type="email"
                 name="email"
@@ -95,11 +99,14 @@ export const Contact = () => {
                 onChange={handleInput}
                 autoCapitalize="off"
                 required
+                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-600"
               />
             </div>
 
-            <div>
-              <label htmlFor="message">Message</label>
+            <div className="space-y-2">
+              <label htmlFor="message" className="text-xl text-gray-800">
+                Message
+              </label>
               <textarea
                 name="message"
                 id="message"
@@ -109,11 +116,17 @@ export const Contact = () => {
                 required
                 cols="30"
                 rows="6"
+                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-600"
               ></textarea>
             </div>
 
-            <div>
-              <button type="submit">Submit</button>
+            <div className="space-y-4 text-center">
+              <button
+                type="submit"
+                className="w-full px-6 py-3 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-600"
+              >
+                Submit
+              </button>
             </div>
           </form>
         </section>

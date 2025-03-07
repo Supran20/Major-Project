@@ -1,21 +1,19 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom"; // Get `glassName` from URL params
-import { useAuth } from "../store/auth"; // Ensure you have this hook for managing authentication
+import { useParams } from "react-router-dom";
+import { useAuth } from "../store/auth";
 
 export const GlassDetails = () => {
-  const { glassName } = useParams(); // Get glass name from URL
+  const { glassName } = useParams();
   const [glassData, setGlassData] = useState([]);
   const [error, setError] = useState(null);
-  const [isLoading, setIsLoading] = useState(true); // State to manage loading
-  const { authorizationToken } = useAuth(); // Authorization token from your auth hook
+  const [isLoading, setIsLoading] = useState(true);
+  const { authorizationToken } = useAuth();
 
-  // Format the glassName into a collection-friendly string
   const collectionName = glassName
     ?.toLowerCase()
     .replace(/\s+/g, "")
     .replace(/[^a-z0-9]/gi, "");
 
-  // Function to fetch glass data
   const fetchGlassData = async () => {
     try {
       if (!authorizationToken) {
@@ -28,7 +26,7 @@ export const GlassDetails = () => {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
-            Authorization: authorizationToken, // Include Bearer token if required
+            Authorization: authorizationToken,
           },
         }
       );
@@ -40,13 +38,13 @@ export const GlassDetails = () => {
       }
 
       const data = await response.json();
-      setGlassData(data); // Directly set the data received from the database
+      setGlassData(data);
       setError(null);
     } catch (err) {
       console.error("Error fetching glass data:", err);
       setError(err.message);
     } finally {
-      setIsLoading(false); // Ensure loading is set to false after fetching
+      setIsLoading(false);
     }
   };
 
@@ -57,27 +55,36 @@ export const GlassDetails = () => {
   }, [collectionName]);
 
   return (
-    <section className="admin-glasses-section">
-      <div className="container">
-        <h1 className="glass-details-title">
+    <section className="py-8 bg-gray-100">
+      <div className="container mx-auto px-4">
+        <h1 className="text-2xl font-bold text-center mb-4">
           Glasses Details: {glassName || "Loading..."}
         </h1>
-        {isLoading && <p>Loading data...</p>}
-        {error && <p className="error-message">Error: {error}</p>}
+        {isLoading && (
+          <p className="text-center text-gray-500">Loading data...</p>
+        )}
+        {error && (
+          <p className="text-center text-red-500 font-semibold mt-4">
+            Error: {error}
+          </p>
+        )}
         {!isLoading && !error && glassData.length === 0 && (
-          <p>No data available for {glassName}.</p>
+          <p className="text-center text-gray-500">
+            No data available for {glassName}.
+          </p>
         )}
         {!isLoading && !error && glassData.length > 0 && (
-          <div className="table-container">
-            <table className="glass-details-table">
+          <div className="overflow-x-auto mt-8">
+            <table className="min-w-full bg-white shadow-md rounded-lg">
               <thead>
-                <tr>
-                  <th>Stock</th>
-                  <th>No. of Reviewers</th>
-                  <th>Pieces Sold</th>
-                  <th>Base Price</th>
-                  <th>Market Price</th>
-                  <th>Timestamp</th> {/* New column for Timestamp */}
+                <tr className="bg-gray-200 text-left">
+                  <th className="py-3 px-6">Stock</th>
+                  <th className="py-3 px-6">No. of Reviewers</th>
+                  <th className="py-3 px-6">Pieces Sold</th>
+                  <th className="py-3 px-6">Base Price</th>
+                  <th className="py-3 px-6">Market Price</th>
+                  <th className="py-3 px-6">Competitor Price</th>
+                  <th className="py-3 px-6">Timestamp</th>
                 </tr>
               </thead>
               <tbody>
@@ -89,25 +96,13 @@ export const GlassDetails = () => {
                   if (prevMarketPrice !== null) {
                     if (glass.Market_Price > prevMarketPrice) {
                       priceArrow = (
-                        <span
-                          style={{
-                            color: "green",
-                            fontSize: "1.5rem",
-                            fontWeight: "bold",
-                          }}
-                        >
+                        <span className="text-green-500 text-xl font-bold">
                           ▲
                         </span>
                       );
                     } else if (glass.Market_Price < prevMarketPrice) {
                       priceArrow = (
-                        <span
-                          style={{
-                            color: "red",
-                            fontSize: "1.5rem",
-                            fontWeight: "bold",
-                          }}
-                        >
+                        <span className="text-red-500 text-xl font-bold">
                           ▼
                         </span>
                       );
@@ -115,17 +110,26 @@ export const GlassDetails = () => {
                   }
 
                   return (
-                    <tr key={glass._id || glass.No_of_Reviewers}>
-                      <td>{glass.Stock || "N/A"}</td>
-                      <td>{glass.No_of_Reviewers || "N/A"}</td>
-                      <td>{glass.Pieces_sold || "N/A"}</td>
-                      <td>{glass.Base_Price || "N/A"}</td>
-                      <td>
-                        {glass.Market_Price || "N/A"}{" "}
-                        <span style={{ marginLeft: "10px" }}>{priceArrow}</span>
+                    <tr
+                      key={glass._id || glass.No_of_Reviewers}
+                      className="border-b"
+                    >
+                      <td className="py-3 px-6">{glass.Stock || "N/A"}</td>
+                      <td className="py-3 px-6">
+                        {glass.No_of_Reviewers || "N/A"}
                       </td>
-                      <td>{glass.Timestamp || "N/A"}</td>{" "}
-                      {/* Use Timestamp from database */}
+                      <td className="py-3 px-6">
+                        {glass.Pieces_sold || "N/A"}
+                      </td>
+                      <td className="py-3 px-6">{glass.Base_Price || "N/A"}</td>
+                      <td className="py-3 px-6">
+                        {glass.Market_Price || "N/A"}{" "}
+                        <span className="ml-2">{priceArrow}</span>
+                      </td>
+                      <td className="py-3 px-6">
+                        {glass.Competitor_Price || "N/A"}
+                      </td>
+                      <td className="py-3 px-6">{glass.Timestamp || "N/A"}</td>
                     </tr>
                   );
                 })}

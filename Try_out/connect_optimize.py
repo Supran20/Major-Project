@@ -15,15 +15,15 @@ ensemble_model = joblib.load("ensemble_model.pkl")
 
 # Product details for each collection
 products = {
-    "bluelightblockingglasses": {"Product_ID": 9, "Base_Price": 2800, "Market_Price": 3000},
+    "raybanvioletgun": {"Product_ID": 7, "Base_Price": 500, "Market_Price": 1500},
     "cateyesunglasses": {"Product_ID": 8, "Base_Price": 700, "Market_Price": 1100},
     "classicaviatorshades": {"Product_ID": 7, "Base_Price": 200, "Market_Price": 1000},
-    "eco-friendlyframes": {"Product_ID": 6, "Base_Price": 4500, "Market_Price": 6000},
-    "highdefinitionreadingglasses": {"Product_ID": 5, "Base_Price": 1400, "Market_Price": 2000},
-    "lightweighttitaniumglasses": {"Product_ID": 4, "Base_Price": 500, "Market_Price": 1400},
-    "vintageroundglasses": {"Product_ID": 3, "Base_Price": 1600, "Market_Price": 3000},
+    "elitegoldsportshades": {"Product_ID": 6, "Base_Price": 4500, "Market_Price": 6000},
+    "roundbrownsunglasses": {"Product_ID": 5, "Base_Price": 1400, "Market_Price": 2000},
+    "steampunkeclipseshades": {"Product_ID": 4, "Base_Price": 500, "Market_Price": 1400},
+    "oakleyrainbowsportsglasses": {"Product_ID": 3, "Base_Price": 1600, "Market_Price": 3000},
     "squaredesignerframes": {"Product_ID": 2, "Base_Price": 1300, "Market_Price": 1530},
-    "polarizedsportsglasses": {"Product_ID": 1, "Base_Price": 700, "Market_Price": 900},
+    "raybanblackpolarizedsunglasses": {"Product_ID": 1, "Base_Price": 700, "Market_Price": 900},
     "roundmetalsunglasses": {"Product_ID": 3, "Base_Price": 1600, "Market_Price": 3000}
 }
 

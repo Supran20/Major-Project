@@ -31,17 +31,13 @@ export const ProductCard = () => {
                   <div className="price-section">
                     {curElem.new_Market_Price < curElem.Market_Price ? (
                       <>
-                        <p className="old-price">
-                          Rs {curElem.Market_Price}
-                        </p>
+                        <p className="old-price">Rs {curElem.Market_Price}</p>
                         <p className="new-price">
                           Rs {curElem.new_Market_Price}
                         </p>
                       </>
                     ) : (
-                      <p className="normal-price">
-                        Rs {curElem.Market_Price}
-                      </p>
+                      <p className="normal-price">Rs {curElem.Market_Price}</p>
                     )}
                   </div>
                 </div>
@@ -57,7 +53,7 @@ export const ProductCard = () => {
 
       <style jsx>{`
         .section-cards {
-          padding: 2rem 0;
+          padding: 3rem 0;
           font-family: Arial, sans-serif;
         }
         .container {
@@ -82,15 +78,17 @@ export const ProductCard = () => {
           border-radius: 8px;
           overflow: hidden;
           box-shadow: 0 4px 6px rgba(16, 16, 16, 0.1);
-          transition: transform 0.2s ease;
+          transition: transform 0.3s ease, box-shadow 0.3s ease;
           text-align: center;
         }
         .card:hover {
-          transform: scale(1.02);
+          transform: scale(1.05);
+          box-shadow: 0 8px 12px rgba(16, 16, 16, 0.2);
         }
         .card-img img {
           width: 100%;
           height: auto;
+          object-fit: cover;
           max-height: 200px;
         }
         .card-details {
@@ -119,7 +117,7 @@ export const ProductCard = () => {
         }
         .normal-price {
           font-size: 1.5rem;
-          color:  #e63946;
+          color: #e63946;
           font-weight: bold;
         }
         .product-card-link {
