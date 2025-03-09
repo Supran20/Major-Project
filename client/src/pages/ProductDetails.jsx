@@ -1,7 +1,7 @@
 import React from "react";
 import { useParams } from "react-router-dom";
 import { useAuth } from "../store/auth";
-
+import './wearglass'
 const ProductDetail = () => {
   const { name } = useParams(); // Get the product name from the URL
   const { cards } = useAuth();
@@ -13,8 +13,15 @@ const ProductDetail = () => {
     return <p>Product not found.</p>; // If the product is not found
   }
 
+ 
+ 
+
+
+ 
+  
+
   return (
-    <div className="page-container">
+    <div className="page-container en" >
       <div className="card">
         <div className="content-container">
           {/* Product Image */}
@@ -63,7 +70,7 @@ const ProductDetail = () => {
               Select Lenses
             </button>
 
-            <button className="button secondary-button">
+            {/* <button className="button secondary-button">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 className="icon"
@@ -79,7 +86,11 @@ const ProductDetail = () => {
                 />
               </svg>
               Try On
-            </button>
+            </button> */}
+          {/* <button >
+            <img src="./images/US_rayban_justin_noir_rougeMirroir.jpg" alt="" className="model_img"/>
+          </button> */}
+          <a href={`http://127.0.0.1:8000/specific/${product.model}`}>Try On</a>
 
             {/* Technical Information */}
             <div className="technical-info">
